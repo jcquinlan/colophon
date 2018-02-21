@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    Welcome to the Colophon dashboard
+    Welcome to the Colophont dashboard
+    {% include 'partials/form.html' with action_url='dashboard' form=form button_text='Upload' %}
 {% endblock %}
