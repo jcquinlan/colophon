@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    Welcome to the Colophont dashboard
-    {% include 'partials/form.html' with action_url='dashboard' form=form button_text='Upload' %}
+    {% include 'partials/page-header.html' with page_title='Dashboard' %}
+
+    <div class="columns">
+        <div class="column"></div>
+        <div class="column is-6">
+            <div class="document-list">
+                {% for document in documents %}
+                    {% include 'partials/documents/document-card.html' %} 
+                {% endfor %}
+            </div>
+        </div>
+        <div class="column"></div>
+    </div>
+
 {% endblock %}

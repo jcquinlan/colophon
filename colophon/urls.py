@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from core.views.dashboard import DashboardView
+from core.views.upload_design_document import UploadDesignDocumentView
 
 urlpatterns = [
     path('', DashboardView.as_view(), name='dashboard'),
+    path('upload/', UploadDesignDocumentView.as_view(), name='upload'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
 ]

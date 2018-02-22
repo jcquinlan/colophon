@@ -5,14 +5,14 @@ from core.forms.create_design_document_form import CreateDesignDocumentForm
 
 from core.models import DesignDocument
 
-class DashboardView(LoginRequiredMixin, View):
-    template_name = 'core/dashboard.html'
+class UploadDesignDocumentView(LoginRequiredMixin, View):
+    template_name = 'core/upload-design-document.html'
 
     def get(self, request):
-        documents = DesignDocument.objects.all()
+        form = CreateDesignDocumentForm()
 
         context = {
-            'documents': documents,
+            'form': form
         }
 
         return render(request, self.template_name, context)
