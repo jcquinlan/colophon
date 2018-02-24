@@ -1,15 +1,14 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item cc-logo" href="/">
-        colophont
-    </a>
-  </div>
-
-  <div class="navbar-menu is-active">
-      {% if user.is_authenticated %}
-          {% include 'partials/nav/logged-in-links.html' %}
-      {% else %}
-        {% include 'partials/nav/logged-out-links.html' %}
-      {% endif %}
+<nav role="navigation" aria-label="main navigation">
+  <div class="nav-wrapper">
+    <div class="container">
+      <a href="/" class="brand-logo">colofont</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {% if user.is_authenticated %}
+            {% include 'partials/nav/logged-in-links.html' %}
+        {% else %}
+          {% include 'partials/nav/logged-out-links.html' %}
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>

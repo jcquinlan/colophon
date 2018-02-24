@@ -1,14 +1,4 @@
-<div class="navbar-start">
-    <div class="navbar-item">
-        <a href="{% url 'dashboard' %}" class="navbar-link">Dashboard</a>
-    </div>
-    <div class="navbar-item">
-        <a href="{% url 'upload' %}" class="navbar-link">Upload</a>
-    </div>
-</div>
+<li><a href="{% url 'upload' %}" class="navbar-link">Upload</a></li>
+<li><a href="{% url 'dashboard' %}" class="navbar-link">Dashboard</a></li>
+<li><a href="{% url 'auth_logout' %}" class="navbar-link">Logout</a></li>
 
-<div class="navbar-end">
-    <div class="navbar-item">
-    <a href="{% url 'auth_logout' %}" class="navbar-link">Logout</a>
-    </div>
-</div>

@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from core.views.dashboard import DashboardView
 from core.views.upload_design_document import UploadDesignDocumentView
+from core.views.s3.sign_s3 import SignS3View
 
 urlpatterns = [
     path('', DashboardView.as_view(), name='dashboard'),
     path('upload/', UploadDesignDocumentView.as_view(), name='upload'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('sign_s3/', SignS3View.as_view()),
 ]

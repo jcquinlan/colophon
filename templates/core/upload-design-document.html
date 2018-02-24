@@ -1,5 +1,67 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    {% include 'partials/form.html' with action_url='dashboard' form=form button_text='Upload' %}
+
+    {% include 'partials/page-header.html' with page_title='Upload New Document' %}
+
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s4"><a href="#document-images">Images</a></li>
+                <li class="tab col s4"><a href="#document-specifics">Specifics</a></li>
+                <li class="tab col s4"><a href="#document-confirm">Upload</a></li>
+            </ul>
+        </div>
+
+        <div id="document-images" class="col s12">
+            <!-- File Input for selecting document images -->
+            <!--<div class="field">
+                <label for="id_image_upload">Image upload:</label>
+                <div class="control">
+                    <input type="file" name="image_upload" required="" id="id_image_upload">
+                </div>
+            </div>-->
+
+            <div class="file-field input-field">
+                <div class="btn"
+                    <span>File</span>
+                    <input type="file" multiple id="id_image_upload">
+                </div>
+
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload one or more image files">
+                </div>
+            </div>
+
+            <!-- List of images uploaded by the user -->
+            <div class="user-uploaded-images" id="user-uploaded-images">
+            </div>
+        </div>
+        
+        <div id="document-specifics" class="col s12">
+            <!-- Form containing specifics -->
+            {% include 'partials/form.html' with action_url='dashboard' form=form button_text='Upload' %}
+        </div>
+
+        <div id="document-confirm" class="col s12">Test 3</div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script rel="text/javascript" src="{% static 'javascript/signS3Image.js' %}"></script>
+    <script>
+        var fileInput = $('#id_image_upload');
+        
+        function attachImageToDom(url) {
+            var wrapper = $('#user-uploaded-images');
+            var newImage = $('<img class="materialboxed z-depth-2" src="' + url + '">');
+
+            wrapper.append(newImage);
+
+            newImage.materialbox();
+        }
+
+        handleFileUpload(fileInput[0], attachImageToDom)
+    </script>
 {% endblock %}

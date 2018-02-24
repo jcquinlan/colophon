@@ -1,20 +1,133 @@
- html, body {
-     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-     font-weight: 300;
- }
+/* COLORS*/
+/*********/
+/*
+ * Primary: #F5901A
+ */
 
- h1, h2, h3, h4, h5, h6 {
-     font-family: 'Martel', Arial, Helvetica, sans-serif;
- }
 
-.navbar .navbar-brand {
+/* GLOBAL */
+/**********/
+html, body {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Martel', Arial, Helvetica, sans-serif;
+}
+
+/* MATERIAL OVERRIDES */
+/**********************/
+
+/* Buttons */
+.btn, .btn-large {
+    background-color: #F5901A;
+}
+
+/* Nav */
+nav {
+    background-color: #fff;
+    box-shadow: none;
+    border-bottom: 1px solid #ddd;
+}
+nav .brand-logo {
+    color: #000;
     font-family: 'Martel', Arial, Helvetica, sans-serif;
     font-weight: 900;
     font-size: 1.5em;
+    transition: 0.2s;
+}
+ nav .brand-logo:hover {
+    text-shadow: 3px 3px #F5901A;
+ }
+nav ul a {
+    color: black;
 }
 
+/* Tabs */
+.tabs .tab a {
+    color: #000;
+}
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: #000;
+}
+.tabs .tab a.active {
+    background-color: #fafafa;
+}
+.tabs .indicator {
+    display: none;
+}
 
+/* Forms */
+input, textarea, select {
+    margin-top: 10px;
+}
+input:not([type]),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default),
+textarea.materialize-textarea {
+    /*width: 100%;*/
+    padding: 0 10px;
+    border: 1px solid #eee;
+    background-color: #fdfdfd;
+    width: 100%;
+    display:block;
+    padding: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #ccc;
+    box-shadow: none;
+    outline: none;
+}
+input[type="submit"] {
+    width: inherit;
+}
+select {
+    padding: 0;
+    display: inherit;
+}
+textarea {
+    width: 100%;
+    border: 1px solid #eee;
+    background-color: #fdfdfd;
+    height: 6em;
+}
+select[multiple] {
+    height: 6em;
+}
+label {
+    font-size: 1em;
+    color: #000;
+}
+.field:not(:last-child) {
+    margin-bottom: 30px;
+}
 
+/* Page Header */
  .page-header {
      text-align: center;
      margin-top: 30px;
@@ -34,9 +147,19 @@
     cursor: pointer;
 }
 .document-card:hover {
-    -webkit-box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.34);
--moz-box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.34);
-box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.34);
+    -webkit-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.28);
+    -moz-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.28);
+    box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.28);
 
     transform: translateZ(20px);
+}
+
+/* User Adding Images */
+.user-uploaded-images {
+    display: flex;
+    align-items: center;
+}
+.user-uploaded-images img {
+   height: 200px; 
+   margin-right: 10px;
 }
