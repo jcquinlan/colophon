@@ -1,16 +1,36 @@
+import json
 from django import forms
-from core.models import DesignDocument
+from core.models import DesignDocument, DesignDocumentImage
 
 class CreateDesignDocumentForm(forms.ModelForm):
+    document_images = forms.CharField(widget=forms.HiddenInput(), required=False, label='')
+
     class Meta:
         model = DesignDocument
         exclude = ['uploaded_by', 'created_at', 'has_download', 'has_assets',]
 
     def save(self, request):
         data = self.cleaned_data
+        # Mutably move the file urls from the cleaned data
+        file_urls = json.loads(data.pop('document_images'))
+
         design_document = DesignDocument(
             **data,
             uploaded_by=request.user,
         )
 
         design_document.save()
+
+        print(len(file_urls))
+
+        for url in file_urls:
+            design_document_image = DesignDocumentImage(
+                design_document=design_document,
+                image_url=url,
+            )
+
+            design_document_image.save()
+
+            print(design_document_image)
+
+            design_document.images.add(design_document_image)

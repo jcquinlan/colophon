@@ -1,19 +1,27 @@
-function handleFileUpload(fileInput, callback) {
+function handleFileUpload(fileInput, successCallback, errorCallback) {
     fileInput.onchange = function(){
         var files = fileInput.files;
-        var file = files[0];
 
-        if (!file) {
+        if (!files.length) {
             return alert("No file selected.");
         }
 
-        getSignedRequest(file);
+        if (files.length > 3) {
+            if (errorCallback) errorCallback('You may only upload three images');
+            return;
+        }
+
+        console.log(files);
+
+        for (var i = 0; i < files.length; i++) {
+            getSignedRequest(files[i]);
+        }
     };
 
     function getSignedRequest(file){
         var xhr = new XMLHttpRequest();
 
-        xhr.open("GET", "/sign_s3?file_name="+file.name+"&file_type="+file.type);
+        xhr.open("GET", "/sign_s3?file_name=" + file.name + "&file_type=" + file.type);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
@@ -46,7 +54,7 @@ function handleFileUpload(fileInput, callback) {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200 || xhr.status === 204) {
-                    callback(url)
+                    successCallback(url)
                 }
 
                 else {

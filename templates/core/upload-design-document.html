@@ -34,7 +34,7 @@
         
         <div id="document-specifics" class="col s12">
             <!-- Form containing specifics -->
-            {% include 'partials/form.html' with action_url='dashboard' form=form button_text='Upload' %}
+            {% include 'partials/form.html' with action_url='upload' form=form button_text='Upload' %}
         </div>
 
         <div id="document-confirm" class="col s12">Test 3</div>
@@ -42,25 +42,35 @@
 {% endblock %}
 
 {% block scripts %}
-    <script rel="text/javascript" src="{% static 'javascript/signS3Image.js' %}"></script>
+    <script rel="text/javascript" src="{% static 'javascript/s3/signS3Image.js' %}"></script>
+    <script rel="text/javascript" src="{% static 'javascript/utility/messages.js' %}"></script>
+    <script rel="text/javascript" src="{% static 'javascript/utility/helpers.js' %}"></script>
     <script>
         var fileInput = $('#id_image_upload');
-        
+        var hiddenFileInput = $('#id_document_images');
+        var fileUrls = [];
+
         function attachImageToDom(url) {
             var wrapper = $('#user-uploaded-images');
             var newImage = $('<img class="materialboxed z-depth-2" src="' + url + '">');
 
             removeUploadPhotosHelpText();
-
             wrapper.append(newImage);
-
             newImage.materialbox();
+
+            fileUrls.push(url);
+            hiddenFileInput[0].value = JSON.stringify(fileUrls);
         }
 
         function removeUploadPhotosHelpText() {
             $('.user-uploaded-images .help-text').remove();
         }
 
-        handleFileUpload(fileInput[0], attachImageToDom)
+        function errorCallback(message) {
+            clearFileInput(fileInput[0]);
+            createToast(message, 2000);
+        }
+
+        handleFileUpload(fileInput[0], attachImageToDom, errorCallback)
     </script>
 {% endblock %}

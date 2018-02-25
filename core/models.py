@@ -69,7 +69,7 @@ class DesignDocument(models.Model):
     binding_method = models.CharField(choices=binding_choices, max_length=128, null=True, blank=True)
 
 class DesignDocumentImage(models.Model):
-    design_document = models.ForeignKey(DesignDocument, on_delete=models.CASCADE)
+    design_document = models.ForeignKey(DesignDocument, related_name="images", on_delete=models.CASCADE)
     image_url = models.URLField(max_length=256)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 

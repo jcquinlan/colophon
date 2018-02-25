@@ -16,17 +16,3 @@ class DashboardView(LoginRequiredMixin, View):
         }
 
         return render(request, self.template_name, context)
-
-    def post(self, request):
-        form = CreateDesignDocumentForm(request.POST)
-
-        if form.is_valid():
-            form.save(request)
-
-            redirect(reverse('dashboard'))
-
-        context = {
-            'form': form
-        }
-
-        return render(request, self.template_name, context)

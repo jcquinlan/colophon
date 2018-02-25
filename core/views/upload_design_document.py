@@ -23,7 +23,7 @@ class UploadDesignDocumentView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save(request)
 
-            redirect(reverse('dashboard'))
+            return redirect(reverse('dashboard'))
 
         context = {
             'form': form
