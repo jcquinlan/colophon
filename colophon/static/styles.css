@@ -2,6 +2,7 @@
 /*********/
 /*
  * Primary: #F5901A
+ * Primary Darker: #e88512
  */
 
 
@@ -21,6 +22,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Buttons */
 .btn, .btn-large {
     background-color: #F5901A;
+}
+.btn:hover, .btn-large:hover {
+    background-color: #e88512;
 }
 
 /* Nav */
@@ -103,6 +107,38 @@ textarea.materialize-textarea:focus:not([readonly]) {
     box-shadow: none;
     outline: none;
 }
+input.valid:not([type]),
+input.valid:not([type]):focus,
+input[type=text].valid:not(.browser-default),
+input[type=text].valid:not(.browser-default):focus,
+input[type=password].valid:not(.browser-default),
+input[type=password].valid:not(.browser-default):focus,
+input[type=email].valid:not(.browser-default),
+input[type=email].valid:not(.browser-default):focus,
+input[type=url].valid:not(.browser-default),
+input[type=url].valid:not(.browser-default):focus,
+input[type=time].valid:not(.browser-default),
+input[type=time].valid:not(.browser-default):focus,
+input[type=date].valid:not(.browser-default),
+input[type=date].valid:not(.browser-default):focus,
+input[type=datetime].valid:not(.browser-default),
+input[type=datetime].valid:not(.browser-default):focus,
+input[type=datetime-local].valid:not(.browser-default),
+input[type=datetime-local].valid:not(.browser-default):focus,
+input[type=tel].valid:not(.browser-default),
+input[type=tel].valid:not(.browser-default):focus,
+input[type=number].valid:not(.browser-default),
+input[type=number].valid:not(.browser-default):focus,
+input[type=search].valid:not(.browser-default),
+input[type=search].valid:not(.browser-default):focus,
+textarea.materialize-textarea.valid,
+textarea.materialize-textarea.valid:focus,
+.select-wrapper.valid>input.select-dropdown {
+    border-bottom: 1px solid #e88512;
+    -webkit-box-shadow: 0 1px 0 0 #e88512;
+    box-shadow: 0 1px 0 0 #e88512;
+
+}
 input[type="submit"] {
     width: inherit;
 }
@@ -125,6 +161,14 @@ label {
 }
 .field:not(:last-child) {
     margin-bottom: 30px;
+}
+
+
+/* UTILITY */
+/***********/
+.help-text {
+    font-size: 1em;
+    color: #aaa;
 }
 
 /* Page Header */

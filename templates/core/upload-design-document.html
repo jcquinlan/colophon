@@ -8,21 +8,13 @@
     <div class="row">
         <div class="col s12">
             <ul class="tabs">
-                <li class="tab col s4"><a href="#document-images">Images</a></li>
-                <li class="tab col s4"><a href="#document-specifics">Specifics</a></li>
-                <li class="tab col s4"><a href="#document-confirm">Upload</a></li>
+                <li class="tab col s4"><a href="#document-images">1. Images</a></li>
+                <li class="tab col s4"><a href="#document-specifics">2. Specifics</a></li>
+                <li class="tab col s4"><a href="#document-confirm">3. Upload</a></li>
             </ul>
         </div>
 
         <div id="document-images" class="col s12">
-            <!-- File Input for selecting document images -->
-            <!--<div class="field">
-                <label for="id_image_upload">Image upload:</label>
-                <div class="control">
-                    <input type="file" name="image_upload" required="" id="id_image_upload">
-                </div>
-            </div>-->
-
             <div class="file-field input-field">
                 <div class="btn"
                     <span>File</span>
@@ -36,6 +28,7 @@
 
             <!-- List of images uploaded by the user -->
             <div class="user-uploaded-images" id="user-uploaded-images">
+                <p class="help-text">Please upload up to 3 images of the document.</p>
             </div>
         </div>
         
@@ -57,9 +50,15 @@
             var wrapper = $('#user-uploaded-images');
             var newImage = $('<img class="materialboxed z-depth-2" src="' + url + '">');
 
+            removeUploadPhotosHelpText();
+
             wrapper.append(newImage);
 
             newImage.materialbox();
+        }
+
+        function removeUploadPhotosHelpText() {
+            $('.user-uploaded-images .help-text').remove();
         }
 
         handleFileUpload(fileInput[0], attachImageToDom)
