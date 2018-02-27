@@ -5,9 +5,6 @@
                 <a class="carousel-item"><img src="{{ image.image_url }}"></a>
             {% endfor %}
         </div>
-
-        <div class="arrow arrow-left"></div>
-        <div class="arrow arrow-right"></div>
     </div>
     <div class="card-content">
         <!-- Card Header -->
@@ -44,15 +41,10 @@
 
         <div class="content-footer">
             <div class="tags">
-                <div class="chip">
-                    Tag
-                </div>
-                <div class="chip">
-                    Tag
-                </div>
-                <div class="chip">
-                    Tag
-                </div>
+                <a class="document-link" href="{% url 'design_document_detail' document_id=document.id %}">
+                    View Document
+                    <i class="fas fa-link"></i>
+                </a>
             </div>
 
             <div class="asset-statuses">

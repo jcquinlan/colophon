@@ -12,8 +12,14 @@ html, body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     font-weight: 300;
 }
+body {
+    background-color: #fbfbfb;
+}
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Martel', Arial, Helvetica, sans-serif;
+}
+a {
+    color: #000;
 }
 
 /* MATERIAL OVERRIDES */
@@ -308,7 +314,7 @@ label {
     font-size: 25px;
 }
 .document-card .card-content .content-header .interactions i.favorite {
-    color: gold;
+    color: #F5901A;
     cursor: pointer;
 }
 .document-card .card-content .content-header .interactions .favorite-text {
@@ -329,6 +335,20 @@ label {
 .document-card .card-content .content-footer .tags {
     display: flex;
     align-items: flex-end;
+}
+.document-card .card-content .content-footer .document-link {
+    margin: 10px;
+    font-size: 1.2em;
+    font-weight: 100;
+}
+.document-card .card-content .content-footer .document-link i {
+    display: none;
+    margin-left: 5px;
+    transform: translateY(2px);
+    color: #F5901A;
+}
+.document-card .card-content .content-footer .document-link:hover i {
+    display: inline-block;
 }
 .document-card .card-content .content-footer .asset-statuses {
     display: flex;
