@@ -1,20 +1,68 @@
 <div class="card document-card">
-  <div class="card-image">
+    <div class="card-image">
         <div class="carousel carousel-slider">
             {% for image in document.images.all %}
                 <a class="carousel-item"><img src="{{ image.image_url }}"></a>
             {% endfor %}
         </div>
+
+        <div class="arrow arrow-left"></div>
+        <div class="arrow arrow-right"></div>
     </div>
     <div class="card-content">
-        <p>{{ document.images.count }}</p>
-        <p>I am a very simple card. I am good at containing small bits of information.
-        I am convenient because I require little markup to use effectively.</p>
-    </div>
-    <div class="card-action">
-        <a href="#">This is a link</a>
+        <!-- Card Header -->
+        <div class="content-header">
+            <div class="header-content">
+                <h4>{{ document.title }}</h4>
+                <p>{{ document.uploaded_by }} - {{ document.created_at|date:'M dS Y' }}</p>
+            </div>
+
+            <div class="interactions">
+                <p class="favorite-text">0 favorites  - </p>
+                <i class="far fa-star favorite"></i>
+            </div>
+        </div>
+
+        <!-- Card Specs Tables -->
+        <div class="rtable">
+            <div class="rtable-header">
+                <div style="order:1;" class="cell">Baseline</div>
+                <div style="order:2;" class="cell">Size</div>
+                <div style="order:3;" class="cell">Gutter</div>
+                <div style="order:4;" class="cell">Page Size</div>
+                <div style="order:5;" class="cell">Margins</div>
+            </div>
+
+            <div class="rtable-row">
+                <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+            </div>
+        </div>
+
+        <div class="content-footer">
+            <div class="tags">
+                <div class="chip">
+                    Tag
+                </div>
+                <div class="chip">
+                    Tag
+                </div>
+                <div class="chip">
+                    Tag
+                </div>
+            </div>
+
+            <div class="asset-statuses">
+                <div class="asset-status has-assets">
+                    <i class="fas fa-file-image"></i>
+                </div>
+                <div class="asset-status has-file">
+                    <i class="fas fa-cloud-download-alt"></i>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<script>
-    $('.carousel.carousel-slider').carousel({ fullWidth: true });
-</script>

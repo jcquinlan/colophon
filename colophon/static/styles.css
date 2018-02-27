@@ -46,6 +46,12 @@ nav .brand-logo {
  }
 nav ul a {
     color: black;
+    border-bottom: 2px solid transparent;
+    transition: 0.1s;
+}
+nav ul a:hover {
+    background-color: transparent;
+    border-bottom: 3px solid orange;
 }
 
 /* Tabs */
@@ -171,6 +177,93 @@ label {
     font-size: 1em;
     color: #aaa;
 }
+.arrow {
+	position: absolute;
+    top: 50%;
+    transition: 0.2s;
+}
+.arrow:after, .arrow:before {
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+    cursor: pointer;
+}
+.arrow.arrow-right {
+    left: 100%;
+}
+.arrow.arrow-left {
+    right: 100%;
+}
+.arrow.arrow-right:hover {
+    transform: translateX(10px);
+}
+.arrow.arrow-left:hover {
+    transform: translateX(-10px);
+}
+.arrow.arrow-left:after, .arrow.arrow-left:before {
+    right: 100%;
+    transform: translateX(7px);
+}
+.arrow.arrow-right:after, .arrow.arrow-right:before {
+    left: 100%;
+    transform: translateX(-7px);
+}
+.arrow:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-width: 25px;
+	margin-top: -25px;
+}
+.arrow:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-width: 25px;
+	margin-top: -25px;
+}
+.arrow.arrow-left:after {
+	border-right-color: orange;
+}
+.arrow.arrow-left:before {
+	border-right-color: orange;
+}
+.arrow.arrow-right:after {
+	border-left-color: orange;
+}
+.arrow.arrow-right:before {
+	border-left-color: orange;
+}
+
+/* Tables */
+/* Tables
+================================== */
+.rtable {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px 0;
+  padding: 0;
+}
+.rtable-header, .rtable-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.rtable .cell {
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: center;
+}
+.rtable-header .cell {
+    border-right: 1px solid #eee;
+}
+.rtable-row .cell {
+    font-weight: 900;
+}
+.cell:last-child {
+    border: none;
+}
+
+
 
 /* Page Header */
  .page-header {
@@ -189,13 +282,70 @@ label {
 .document-card {
     margin-bottom: 30px;
     transition: 0.6s;
-    cursor: pointer;
 }
 .document-card:hover {
     -webkit-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.28);
     -moz-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.28);
     box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.28);
 } 
+.document-card .card-content .content-header {
+    display: flex;
+    justify-content: space-between;
+}
+.document-card .card-content .content-header .header-content h4 {
+    font-size: 2em;
+    margin: 0;
+}
+.document-card .card-content .content-header .header-content p {
+    color: #aaa;
+}
+.document-card .card-content .content-header .interactions {
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
+}
+.document-card .card-content .content-header .interactions i {
+    font-size: 25px;
+}
+.document-card .card-content .content-header .interactions i.favorite {
+    color: gold;
+    cursor: pointer;
+}
+.document-card .card-content .content-header .interactions .favorite-text {
+    color: #aaa;
+    margin-right: 5px;
+    margin-top: 4px;
+}
+.document-card .card-content .description {
+    margin: 30px 0;
+    padding: 0 30px;
+}
+.document-card .card-content .content-footer {
+    height: 80px;
+    display: flex;
+    margin: 30px -15px -15px -15px;
+    justify-content: space-between;
+}
+.document-card .card-content .content-footer .tags {
+    display: flex;
+    align-items: flex-end;
+}
+.document-card .card-content .content-footer .asset-statuses {
+    display: flex;
+}
+.document-card .card-content .content-footer .asset-statuses .asset-status {
+   width: 80px;
+   background-color: #eee; 
+   color: #aaa;
+   display: flex;
+   flex-grow: 1;
+   align-items: center;
+   justify-content: center;
+   margin-right: 5px;
+}
+.document-card .card-content .content-footer .asset-statuses .asset-status:last-child {
+    margin: 0;
+}
 
 /* User Adding Images */
 .user-uploaded-images {
@@ -216,11 +366,23 @@ label {
     align-items: center;
 }
 .document-list .document-card {
+    width: 100%;
     max-width: 600px;
 }
 .document-list .document-card .card-image {
     background-color: #000;
 }
+.document-list .document-card .card-image .arrow {
+    opacity: 0;
+}
+.document-list .document-card .card-image:hover .arrow {
+    opacity: 100;
+}
+.document-card .rtable {
+    margin-left: -24px;
+    margin-right: -24px;
+}
+
 
 .carousel-item img {
     width: 100%;
