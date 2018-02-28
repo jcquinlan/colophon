@@ -11,7 +11,7 @@ class DesignDocumentDetailView(LoginRequiredMixin, View):
         design_document = get_object_or_404(DesignDocument, id=document_id)
 
         context = {
-            'design_document': design_document
+            'document': design_document
         }
 
         return render(request, self.template_name, context)

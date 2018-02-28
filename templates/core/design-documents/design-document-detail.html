@@ -1,13 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% include 'partials/page-header.html' with page_title=design_document.title %}
+<div class="page document-detail">
+    <div class="row">
+        <div class="col m8 s12 document-information">
 
-    <div class="columns">
-        <div class="column"></div>
-        <div class="column is-6">
-            Test
+            <div class="information-header">
+                <h3>{{ document.title }} <span>- {{ document.uploaded_by }}</span></h3>
+                <div class="interactions">
+                    <p class="favorite-text">0 favorites  - </p>
+                    <i class="far fa-star favorite"></i>
+                </div>
+            </div>
+
+            <div class="rtable">
+                <div class="rtable-header">
+                    <div style="order:1;" class="cell">Baseline</div>
+                    <div style="order:2;" class="cell">Size</div>
+                    <div style="order:3;" class="cell">Gutter</div>
+                    <div style="order:4;" class="cell">Page Size</div>
+                    <div style="order:5;" class="cell">Margins</div>
+                </div>
+
+                <div class="rtable-row">
+                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                </div>
+            </div>
+
+            <p>{{ document.description }}</p>
+
+            <div class="information-buttons">
+                <button class="btn primary">
+                    Files
+                    <i class="fas fa-cloud-download-alt"></i>
+                </button>
+            </div>
         </div>
-        <div class="column"></div>
+
+        <div class="col m4 s12">
+            <div class="image-list">
+                {% for image in document.images.all %}
+                   <img class="materialboxed" src="{{ image.image_url }}">
+                {% endfor %}
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}
