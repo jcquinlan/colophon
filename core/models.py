@@ -34,6 +34,7 @@ weight_choices = (
     ('mono', 'Mono'),
 )
 
+
 binding_choices = (
     ('perfect_binding', 'Perfect Binding'),
     ('saddle_stitch', 'Saddle Stitch'),
@@ -67,6 +68,7 @@ class DesignDocument(models.Model):
     typeface = models.CharField(max_length=64, null=True, blank=True)
     weights = SeparatedValuesField(choices=weight_choices, token=',', max_length=150, null=True, blank=True)
     binding_method = models.CharField(choices=binding_choices, max_length=128, null=True, blank=True)
+
 
 class DesignDocumentImage(models.Model):
     design_document = models.ForeignKey(DesignDocument, related_name="images", on_delete=models.CASCADE)

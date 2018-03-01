@@ -19,6 +19,8 @@ from django.urls import path, include
 from core.views.dashboard import DashboardView
 from core.views.upload_design_document import UploadDesignDocumentView
 from core.views.design_documents.design_document_detail import DesignDocumentDetailView
+from core.views.profile.profile import ProfileView
+from core.views.profile.profile_posts import ProfilePostsView
 from core.views.s3.sign_s3 import SignS3View
 
 urlpatterns = [
@@ -26,6 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('upload/', UploadDesignDocumentView.as_view(), name='upload'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    path('profile/posts/', ProfilePostsView.as_view(), name='profile_posts'),
     path('document/<int:document_id>/', DesignDocumentDetailView.as_view(), name='design_document_detail'),
     path('sign_s3/', SignS3View.as_view()),
 ]

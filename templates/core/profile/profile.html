@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'partials/page-header.html' with page_title='Profile' %}
+
+    <div class="row">
+        <div class="col s12 document-information">
+            <a href="{% url 'profile_posts' %}"><button class="btn primary">Your Posts</button></a>
+        </div>
+    </div>
+{% endblock %}
