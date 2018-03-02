@@ -41,10 +41,11 @@
 
         <div class="content-footer">
             <div class="tags">
-                <a class="document-link" href="{% url 'design_document_detail' document_id=document.id %}">
-                    View Document
-                    <i class="fas fa-link"></i>
-                </a>
+                <button class="btn primary">
+                    <a class="document-link" href="{% url 'design_document_detail' document_id=document.id %}">
+                        View
+                    </a>
+                </button>
             </div>
 
             <div class="asset-statuses">

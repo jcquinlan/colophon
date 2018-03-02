@@ -3,6 +3,8 @@
 /*
  * Primary: #F5901A
  * Primary Darker: #e88512
+ * Secondary: #455C7B
+ * Secondary Darker: #3c4f68
  * Danger: #ff3535
  * Danger Lighter: #fc4444
  */
@@ -40,6 +42,9 @@ img {
 }
 .btn:focus, .btn-large:focus, .btn-floating:focus {
     background-color: #e88512;
+}
+.btn a {
+    color: #fff;
 }
 
 /* Nav */
@@ -187,6 +192,9 @@ button {
     background-color: transparent;
     border: none;
 }
+button:focus {
+    background-color: #e88512;
+}
 .field:not(:last-child) {
     margin-bottom: 30px;
 }
@@ -202,14 +210,13 @@ button {
     text-transform: uppercase;
     transition: 0.2s;
 
-    padding: 10px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),
                 0 1px 5px 0 rgba(0,0,0,0.12),
                 0 3px 1px -2px rgba(0,0,0,0.2);
     color: #fff;
     background-color: #ff3535;
 }
-.danger:hover {
+.danger:hover, .danger:focus {
     background-color: #fc4444;
 }
 .page {
@@ -231,6 +238,18 @@ button {
     color: #aaa;
     margin-right: 5px;
     margin-top: 4px;
+}
+.download-assets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+    height: 80px;
+    background-color: #455C7B;
+}
+.download-assets:hover, .download-assets:focus {
+    background-color: #3c4f68;
 }
 
 /* Tables */
@@ -409,15 +428,14 @@ button {
 .document-detail .document-information .information-buttons {
     margin-top: 30px;
 }
-.document-detail .document-information .information-buttons i {
-    margin-left: 10px;
-}
 .document-detail .document-information .owner-controls {
     margin-top: 60px;
-    padding: 30px;
-
-    border: 1px solid #eee;
-    background-color: #fff;
+}
+.document-detail .document-information .owner-controls .btn {
+    margin-left: 15px;
+}
+.document-detail .document-information .owner-controls .btn:first-child {
+    margin: 0;
 }
 .image-list img {
     margin-bottom: 30px;
