@@ -310,6 +310,7 @@ button:focus {
     justify-content: space-between;
 }
 .document-card .card-content .content-header .header-content h4 {
+    font-weight: 900;
     font-size: 2em;
     margin: 0;
 }
@@ -359,6 +360,10 @@ button:focus {
 }
 .document-card .card-content .content-footer .asset-statuses .asset-status:last-child {
     margin: 0;
+}
+.document-card .card-content .content-footer .asset-statuses .asset-status.has-file.is-available {
+    background-color: #455C7B;
+    color: #fff;
 }
 
 /* User Adding Images */

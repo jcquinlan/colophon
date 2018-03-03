@@ -8,9 +8,10 @@
     <div class="row">
         <div class="col s12">
             <ul class="tabs">
-                <li class="tab col s4"><a href="#document-images">1. Images</a></li>
-                <li class="tab col s4"><a href="#document-specifics">2. Specifics</a></li>
-                <li class="tab col s4"><a href="#document-confirm">3. Upload</a></li>
+                <li class="tab col s3"><a href="#document-images">1. Images</a></li>
+                <li class="tab col s3"><a href="#document-asset">2. Asset</a></li>
+                <li class="tab col s3"><a href="#document-specifics">3. Specifics</a></li>
+                <li class="tab col s3"><a href="#document-confirm">4. Upload</a></li>
             </ul>
         </div>
 
@@ -31,6 +32,23 @@
                 <p class="help-text">Please upload up to 3 images of the document.</p>
             </div>
         </div>
+
+        <div id="document-asset" class="col s12">
+            <div class="file-field input-field">
+                <div class="btn"
+                    <span>File</span>
+                    <input type="file" id="id_asset_upload">
+                </div>
+
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload an InDesign file">
+                </div>
+            </div>
+
+            <div id="user-uploaded-asset">
+                <p class="help-text">Upload an InDesign file or zip file.</p>
+            </div>
+        </div>
         
         <div id="document-specifics" class="col s12">
             <!-- Form containing specifics -->
@@ -46,8 +64,10 @@
     <script rel="text/javascript" src="{% static 'javascript/utility/messages.js' %}"></script>
     <script rel="text/javascript" src="{% static 'javascript/utility/helpers.js' %}"></script>
     <script>
-        var fileInput = $('#id_image_upload');
-        var hiddenFileInput = $('#id_document_images');
+        var imageFileInput = $('#id_image_upload');
+        var assetFileInput = $('#id_asset_upload');
+        var hiddenImageFileInput = $('#id_document_images');
+        var hiddenAssetFileInput = $('#id_asset_url');
         var fileUrls = [];
 
         function attachImageToDom(url) {
@@ -59,18 +79,26 @@
             newImage.materialbox();
 
             fileUrls.push(url);
-            hiddenFileInput[0].value = JSON.stringify(fileUrls);
+            hiddenImageFileInput[0].value = JSON.stringify(fileUrls);
+        }
+
+        function handleAssetUrl(url) {
+            console.log(url);
+            hiddenAssetFileInput[0].value = JSON.stringify(url);
         }
 
         function removeUploadPhotosHelpText() {
             $('.user-uploaded-images .help-text').remove();
         }
 
-        function errorCallback(message) {
-            clearFileInput(fileInput[0]);
-            createToast(message, 2000);
+        function errorCallback(fileInput) {
+            return function(message) {
+                clearFileInput(fileInput);
+                createToast(message, 2000);
+            }
         }
 
-        handleFileUpload(fileInput[0], attachImageToDom, errorCallback)
+        handleFileUpload(imageFileInput[0], attachImageToDom, errorCallback(imageFileInput[0]))
+        handleFileUpload(assetFileInput[0], handleAssetUrl, errorCallback(assetFileInput[0]))
     </script>
 {% endblock %}

@@ -11,8 +11,6 @@ function handleFileUpload(fileInput, successCallback, errorCallback) {
             return;
         }
 
-        console.log(files);
-
         for (var i = 0; i < files.length; i++) {
             getSignedRequest(files[i]);
         }
@@ -21,7 +19,13 @@ function handleFileUpload(fileInput, successCallback, errorCallback) {
     function getSignedRequest(file){
         var xhr = new XMLHttpRequest();
 
-        xhr.open("GET", "/sign_s3?file_name=" + file.name + "&file_type=" + file.type);
+        console.log(file.type);
+
+        xhr.open("GET", "/sign_s3?file_name=" +
+            encodeURIComponent(file.name) +
+            "&file_type=" +
+            'application/x-indesign'
+        );
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
@@ -31,7 +35,7 @@ function handleFileUpload(fileInput, successCallback, errorCallback) {
                 }
 
                 else {
-                    alert("Could not get signed URL.");
+                    errorCallback("Could not get signed URL.");
                 }
             }
         };
@@ -54,11 +58,11 @@ function handleFileUpload(fileInput, successCallback, errorCallback) {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200 || xhr.status === 204) {
-                    successCallback(url)
+                    successCallback(url);
                 }
 
                 else {
-                    alert("Could not upload file.");
+                    errorCallback("Could not upload file.");
                 }
             }
         };

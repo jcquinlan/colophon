@@ -33,11 +33,19 @@
 
             <p>{{ document.description }}</p>
 
+            {% if document.has_download %}
             <div class="information-buttons">
-                <button class="btn download-assets">
-                    <i class="fas fa-cloud-download-alt"></i>
-                </button>
+                <a href="{{ document_package.package_url }}" download>
+                    <button class="btn download-assets tooltipped"
+                        data-position="right"
+                        data-delay="50"
+                        data-tooltip="Download File"
+                    >
+                        <i class="fas fa-cloud-download-alt"></i>
+                    </button>
+                </a>
             </div>
+            {% endif %}
 
             {% if document.uploaded_by == request.user %}
             <div class="owner-controls">

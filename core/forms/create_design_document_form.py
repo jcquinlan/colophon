@@ -1,9 +1,10 @@
 import json
 from django import forms
-from core.models import DesignDocument, DesignDocumentImage
+from core.models import DesignDocument, DesignDocumentImage, DesignDocumentPackage
 
 class CreateDesignDocumentForm(forms.ModelForm):
     document_images = forms.CharField(widget=forms.HiddenInput(), required=False, label='')
+    asset_url = forms.CharField(widget=forms.HiddenInput(), required=False, label='')
 
     class Meta:
         model = DesignDocument
@@ -12,7 +13,10 @@ class CreateDesignDocumentForm(forms.ModelForm):
     def save(self, request):
         data = self.cleaned_data
         # Mutably move the file urls from the cleaned data
-        file_urls = json.loads(data.pop('document_images'))
+        file_urls_string = data.pop('document_images')
+        asset_url_string = data.pop('asset_url')
+        file_urls = json.loads(file_urls_string) if file_urls_string else []
+        asset_url = json.loads(asset_url_string) if asset_url_string else None
 
         design_document = DesignDocument(
             **data,
@@ -21,8 +25,20 @@ class CreateDesignDocumentForm(forms.ModelForm):
 
         design_document.save()
 
-        print(len(file_urls))
+        # Save document package if available
+        if asset_url:
+            design_document_package = DesignDocumentPackage(
+                design_document=design_document,
+                package_url=asset_url
+            )
 
+            design_document.has_download = True
+
+            design_document.save()
+
+            design_document_package.save()
+
+        # Save document images if available
         for url in file_urls:
             design_document_image = DesignDocumentImage(
                 design_document=design_document,
