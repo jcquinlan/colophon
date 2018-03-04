@@ -1,21 +1,23 @@
-<div class="page-header">
-    <div class="left-side">
+<div class="page-footer">
+    <div class="left-side"></div>
+    <div class="center-side">
         {% if paginator %}
             {% if paginator.has_previous %}
                 <a class="pagination-link" href="{% url 'dashboard' %}?page={{ paginator.previous_page_number }}">Prev. Page</a>
             {% endif %}
         {% endif %}
-    </div>
 
-    <div class="center-side">
-        <h1>{{ page_title }}</h1>
-    </div>
+        {% if paginator %}
+            {% if paginator.has_previous and paginator.has_next %}
+            /
+            {% endif %}
+        {% endif %}
 
-    <div class="right-side">
         {% if paginator %}
             {% if paginator.has_next %}
                 <a class="pagination-link" href="{% url 'dashboard' %}?page={{ paginator.next_page_number }}">Next Page</a>
             {% endif %}
         {% endif %}
     </div>
+    <div class="right-side"></div>
 </div>
