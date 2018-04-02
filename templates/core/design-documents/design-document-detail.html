@@ -13,6 +13,12 @@
                 </div>
             </div>
 
+            <ul>
+                {% for typeface in document.typefaces %}
+                <li>{{ typeface }}</li>
+                {% endfor %}
+            </ul>
+
             <div class="rtable">
                 <div class="rtable-header">
                     <div style="order:1;" class="cell">Baseline</div>
@@ -31,7 +37,7 @@
                 </div>
             </div>
 
-            <p>{{ document.description }}</p>
+            <p class="description">{{ document.description }}</p>
 
             {% if document.has_download %}
             <div class="information-buttons">
@@ -49,7 +55,7 @@
 
             {% if document.uploaded_by == request.user %}
             <div class="owner-controls">
-                <button class="btn primary">Edit</button>
+                <a href="{% url 'design_document_edit' document_id=document.id %}"><button class="btn primary">Edit</button></a>
                 <button class="btn danger">Delete</button>
             </div>
             {% endif %}

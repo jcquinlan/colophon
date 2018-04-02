@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
 from separatedvaluesfield.models import SeparatedValuesField
 
+from core.misc.fonts.formatted_fonts import fonts
+
 
 weight_choices = (
     ('roman_regular', 'Roman/Regular'),
@@ -65,7 +67,7 @@ class DesignDocument(models.Model):
     page_dimension_y = models.PositiveIntegerField(null=True, blank=True)
     margin_top = models.PositiveIntegerField(null=True, blank=True)
     margin_bottom = models.PositiveIntegerField(null=True, blank=True)
-    typeface = models.CharField(max_length=64, null=True, blank=True)
+    typefaces = SeparatedValuesField(choices=fonts, token=',', max_length=64, null=True, blank=True)
     weights = SeparatedValuesField(choices=weight_choices, token=',', max_length=150, null=True, blank=True)
     binding_method = models.CharField(choices=binding_choices, max_length=128, null=True, blank=True)
 

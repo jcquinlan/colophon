@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
         <link href="https://fonts.googleapis.com/css?family=Martel:400,900|Montserrat:300,400" rel="stylesheet">
         <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.min.css">
         <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -21,5 +22,6 @@
             {% block content %}{% endblock %}
         </div>
     </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
     {% block scripts %}{% endblock %}
 </html>

@@ -28,9 +28,8 @@
             </div>
 
             <!-- List of images uploaded by the user -->
-            <div class="user-uploaded-images" id="user-uploaded-images">
-                <p class="help-text">Please upload up to 3 images of the document.</p>
-            </div>
+            <p class="help-text">Please upload up to 3 images of the document.</p>
+            <div class="user-uploaded-images" id="user-uploaded-images"></div>
         </div>
 
         <div id="document-asset" class="col s12">
@@ -66,9 +65,12 @@
     <script>
         var imageFileInput = $('#id_image_upload');
         var assetFileInput = $('#id_asset_upload');
+        var typefacesSelect = $('#id_typefaces');
         var hiddenImageFileInput = $('#id_document_images');
         var hiddenAssetFileInput = $('#id_asset_url');
         var fileUrls = [];
+
+        typefacesSelect.selectize();
 
         function attachImageToDom(url) {
             var wrapper = $('#user-uploaded-images');
@@ -83,7 +85,6 @@
         }
 
         function handleAssetUrl(url) {
-            console.log(url);
             hiddenAssetFileInput[0].value = JSON.stringify(url);
         }
 

@@ -1,14 +1,14 @@
 import json
 from django import forms
-from core.models import DesignDocument, DesignDocumentImage, DesignDocumentPackage
+from core.models import DesignDocument
 
-class CreateDesignDocumentForm(forms.ModelForm):
+class EditDesignDocumentForm(forms.ModelForm):
     document_images = forms.CharField(widget=forms.HiddenInput(), required=False, label='')
     asset_url = forms.CharField(widget=forms.HiddenInput(), required=False, label='')
 
     class Meta:
         model = DesignDocument
-        exclude = ['uploaded_by', 'created_at', 'has_download', 'has_assets', 'weights']
+        exclude = ['uploaded_by', 'created_at', 'has_download', 'has_assets',]
 
     def save(self, request):
         data = self.cleaned_data

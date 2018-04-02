@@ -66,6 +66,15 @@ nav .brand-logo {
  nav .brand-logo:hover {
     text-shadow: 3px 3px #F5901A;
  }
+nav .brand-logo span {
+    color: #ccc;
+    font-size: .6em;
+    font-weight: 100;
+    transition: 0.2s;
+}
+nav .brand-logo:hover span {
+    text-shadow: none;
+}
 nav ul a {
     color: black;
     border-bottom: 2px solid transparent;
@@ -89,6 +98,7 @@ nav ul a:hover {
 }
 .tabs .tab a.active {
     background-color: #fff;
+    border: 1px solid #eee;
 }
 .tabs .indicator {
     display: none;
@@ -461,6 +471,12 @@ button:focus {
 }
 .document-detail .document-information {
     padding-right: 90px;
+}
+.document-detail .document-information .description {
+    padding: 30px;
+
+    background-color: #fff;
+    border: 1px solid #eee;
 }
 .document-detail .document-information .information-header {
     display: flex;
