@@ -1,4 +1,33 @@
 <div class="card document-card">
+    <div class="sidebar">
+        <div class="sidebar-upper">
+            <div class="sidebar-section">
+                <small class="section-header">Baseline</small>
+                <p>{{ document.baseline_grid }}</p>
+            </div>
+
+            <div class="sidebar-section">
+                <small class="section-header">Baseline</small>
+                <p>{{ document.baseline_grid }}</p>
+            </div>
+
+            <div class="sidebar-section">
+                <small class="section-header">Baseline</small>
+                <p>{{ document.baseline_grid }}</p>
+            </div>
+
+            <div class="sidebar-section">
+                <small class="section-header">Baseline</small>
+                <p>{{ document.baseline_grid }}</p>
+            </div>
+
+        </div>
+
+        <div class="sidebar-lower">
+
+        </div>
+    </div>
+
     <div class="card-image">
         <div class="carousel carousel-slider">
             {% for image in document.images.all %}
@@ -10,13 +39,18 @@
         <!-- Card Header -->
         <div class="content-header">
             <div class="header-content">
-                <h4>{{ document.title }}</h4>
-                <p>{{ document.uploaded_by }} - {{ document.created_at|date:'M dS Y' }}</p>
+                <a href="{% url 'design_document_detail' document_id=document.id %}"><h4>{{ document.title }}</h4></a>
+
+                <div class="secondary-information">
+                    <p>{{ document.uploaded_by }}</p>
+                    <p>{{ document.created_at|date:'M dS Y' }}</p>
+                    <p>30 likes</p>
+                </div>
             </div>
 
-            <div class="interactions">
+            <!--<div class="interactions">
                 <p class="favorite-text">0 favorites</p>
-            </div>
+            </div>-->
         </div>
 
         <!-- Card Specs Tables -->
