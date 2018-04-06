@@ -272,6 +272,18 @@ button:focus {
     font-weight: 100;
     font-size: 1em;
 }
+.divider-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+}
+.divider-wrapper span {
+   font-size: 0.8em;
+}
+.divider-wrapper div {
+    width: 100%;
+    margin-left: 20px;
+}
 
 /* Tables */
 /**********/
@@ -457,7 +469,8 @@ button:focus {
     justify-content: center;
 }
 .user-uploaded-images img {
-   height: 200px; 
+   height: 200px;
+   width: auto;
    margin-right: 10px;
 }
 

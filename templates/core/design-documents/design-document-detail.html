@@ -3,14 +3,17 @@
 {% block content %}
 <div class="page document-detail">
     <div class="row">
-        <div class="col m8 s12 document-information">
+        <div class="col s12">
 
             <div class="information-header">
-                <h3>{{ document.title }} <span>- {{ document.uploaded_by }}</span></h3>
-                <div class="interactions">
-                    <p class="favorite-text">0 favorites  - </p>
-                    <i class="far fa-star favorite"></i>
-                </div>
+                <h3>{{ document.title }}</h3>
+            </div>
+
+            <p>{{ document.description }}</p>
+
+            <div class="divider-wrapper">
+                <span>Specifications</span>
+                <div class="divider"></div>
             </div>
 
             <ul>
@@ -37,9 +40,12 @@
                 </div>
             </div>
 
-            <p class="description">{{ document.description }}</p>
+            <div class="divider-wrapper">
+                <span>Images</span>
+                <div class="divider"></div>
+            </div>
 
-            {% if document.has_download %}
+            <!--{% if document.has_download %}
             <div class="information-buttons">
                 <a href="{{ document_package.package_url }}" download>
                     <button class="btn download-assets tooltipped"
@@ -51,23 +57,31 @@
                     </button>
                 </a>
             </div>
-            {% endif %}
+            {% endif %}-->
 
-            {% if document.uploaded_by == request.user %}
+        </div>
+
+        <div class="col s12">
+            <div class="image-list">
+                <div class="row">
+                {% for image in document.images.all %}
+                <div class="col m6 s12">
+                   <img class="materialboxed" src="{{ image.image_url }}">
+                </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        {% if document.uploaded_by == request.user %}
+        <div class="col s12">
             <div class="owner-controls">
                 <a href="{% url 'design_document_edit' document_id=document.id %}"><button class="btn primary">Edit</button></a>
                 <button class="btn danger">Delete</button>
             </div>
-            {% endif %}
         </div>
-
-        <div class="col m4 s12">
-            <div class="image-list">
-                {% for image in document.images.all %}
-                   <img class="materialboxed" src="{{ image.image_url }}">
-                {% endfor %}
-            </div>
-        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
