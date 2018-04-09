@@ -6,7 +6,26 @@
         <div class="col s12">
 
             <div class="information-header">
-                <h3>{{ document.title }}</h3>
+                <div>
+                    <h3>{{ document.title }}</h3>
+
+                    <div class="secondary-information">
+                        <p>{{ document.uploaded_by }}</p>
+                        <p>{{ document.created_at|date:'M dS Y' }}</p>
+                        <p>30 likes</p>
+                    </div>
+                </div>
+                <div class="document-interactions">
+                    <a href="{{ document_package.package_url }}" download>
+                        <button class="btn tooltipped"
+                            data-position="bottom"
+                            data-delay="50"
+                            data-tooltip="Download File"
+                        >
+                            <i class="fas fa-cloud-download-alt"></i>
+                        </button>
+                    </a>
+                </div>
             </div>
 
             <p>{{ document.description }}</p>
@@ -44,21 +63,6 @@
                 <span>Images</span>
                 <div class="divider"></div>
             </div>
-
-            <!--{% if document.has_download %}
-            <div class="information-buttons">
-                <a href="{{ document_package.package_url }}" download>
-                    <button class="btn download-assets tooltipped"
-                        data-position="right"
-                        data-delay="50"
-                        data-tooltip="Download File"
-                    >
-                        <i class="fas fa-cloud-download-alt"></i>
-                    </button>
-                </a>
-            </div>
-            {% endif %}-->
-
         </div>
 
         <div class="col s12">
