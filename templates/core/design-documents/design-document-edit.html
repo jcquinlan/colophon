@@ -18,3 +18,10 @@
         </div>
     </div>
 {% endblock %}
+
+{% block scripts %}
+<script>
+    var selectElements = $('select');
+    selectElements.selectize();
+</script>
+{% endblock %}

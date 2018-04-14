@@ -228,6 +228,23 @@ button:focus {
     margin-bottom: 30px;
 }
 
+/* Selective */
+.selectize-control .selectize-input {
+    padding: 0px 10px;
+    box-shadow: none;
+    border: 1px solid #eee;
+}
+.selective-control .selectize-input.focus {
+    box-shadow: none;
+}
+.selectize-control .selectize-input.dropdown-active {
+    box-shadow: none;
+}
+.selectize-control .selectize-dropdown {
+    border: 1px solid #eee;
+    box-shadow: none;
+}
+
 
 /* UTILITY */
 /***********/
@@ -282,7 +299,6 @@ button:focus {
 }
 .pagination-link {
     margin: 0 15px;
-    border-bottom: 3px solid #F5901A;
 
     font-family: Montserrat, Arial, Helvetica, sans-serif;
     font-weight: 100;
@@ -555,6 +571,13 @@ button:focus {
     display: flex;
     align-items: flex-end;
     padding: 15px 0;
+}
+.document-detail .fonts-list {
+    text-align: center;
+}
+.document-detail .fonts-list li {
+    display: inline-block;
+    margin-right: 30px;
 }
 .document-detail .rtable {
     margin-bottom: 30px;

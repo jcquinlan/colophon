@@ -30,16 +30,23 @@
 
             <p>{{ document.description }}</p>
 
+            {% if document.typefaces %}
             <div class="divider-wrapper">
-                <span>Specifications</span>
+                <span>Fonts</span>
                 <div class="divider"></div>
             </div>
 
-            <ul>
+            <ul class="fonts-list">
                 {% for typeface in document.typefaces %}
                 <li>{{ typeface }}</li>
                 {% endfor %}
             </ul>
+            {% endif %}
+
+            <div class="divider-wrapper">
+                <span>Specifications</span>
+                <div class="divider"></div>
+            </div>
 
             <div class="rtable">
                 <div class="rtable-header">

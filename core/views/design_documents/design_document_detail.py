@@ -14,8 +14,6 @@ class DesignDocumentDetailView(LoginRequiredMixin, View):
         if design_document.has_download:
             document_package = DesignDocumentPackage.objects.get(design_document=design_document)
 
-        print(design_document.typefaces)
-
         context = {
             'document': design_document,
             'document_package': document_package
