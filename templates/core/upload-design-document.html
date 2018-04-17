@@ -2,57 +2,8 @@
 {% load static %}
 
 {% block content %}
-
     {% include 'partials/page-header.html' with page_title='Upload New Document' %}
-
-    <div class="row">
-        <div class="col s12">
-            <ul class="tabs">
-                <li class="tab col s4"><a href="#document-images">1. Images</a></li>
-                <li class="tab col s4"><a href="#document-asset">2. Asset</a></li>
-                <li class="tab col s4"><a href="#document-specifics">3. Specifics</a></li>
-            </ul>
-        </div>
-
-        <div id="document-images" class="col s12">
-            <div class="file-field input-field">
-                <div class="btn"
-                    <span>File</span>
-                    <input type="file" multiple id="id_image_upload">
-                </div>
-
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload one or more image files">
-                </div>
-            </div>
-
-            <!-- List of images uploaded by the user -->
-            <p class="help-text">Please upload up to 3 images of the document.</p>
-            <div class="user-uploaded-images" id="user-uploaded-images"></div>
-        </div>
-
-        <div id="document-asset" class="col s12">
-            <div class="file-field input-field">
-                <div class="btn"
-                    <span>File</span>
-                    <input type="file" id="id_asset_upload">
-                </div>
-
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload an InDesign file">
-                </div>
-            </div>
-
-            <div id="user-uploaded-asset">
-                <p class="help-text">Upload an InDesign file or zip file.</p>
-            </div>
-        </div>
-        
-        <div id="document-specifics" class="col s12">
-            <!-- Form containing specifics -->
-            {% include 'partials/form.html' with action_url='upload' form=form button_text='Upload' %}
-        </div>
-    </div>
+    {% include 'partials/documents/document-modify.html' with form=form %}
 {% endblock %}
 
 {% block scripts %}
@@ -62,12 +13,12 @@
     <script>
         var imageFileInput = $('#id_image_upload');
         var assetFileInput = $('#id_asset_upload');
-        var typefacesSelect = $('#id_typefaces');
+        var selectElements = $('select');
         var hiddenImageFileInput = $('#id_document_images');
         var hiddenAssetFileInput = $('#id_asset_url');
         var fileUrls = [];
 
-        typefacesSelect.selectize();
+        selectElements.selectize();
 
         function attachImageToDom(url) {
             var wrapper = $('#user-uploaded-images');
@@ -77,7 +28,16 @@
             wrapper.append(newImage);
             newImage.materialbox();
 
+            addNewImageToForm(url);
+        }
+
+        function addNewImageToForm(url) {
             fileUrls.push(url);
+            updateFormImageFiles();
+        }
+
+
+        function updateFormImageFiles() {
             hiddenImageFileInput[0].value = JSON.stringify(fileUrls);
         }
 
@@ -92,7 +52,7 @@
         function errorCallback(fileInput) {
             return function(message) {
                 clearFileInput(fileInput);
-                createToast(message, 2000);
+                createToast(message, 1500);
             }
         }
 

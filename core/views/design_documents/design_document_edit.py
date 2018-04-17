@@ -23,3 +23,23 @@ class DesignDocumentEditView(LoginRequiredMixin, View):
         }
 
         return render(request, self.template_name, context)
+
+    def post(self, request, document_id):
+        design_document = get_object_or_404(DesignDocument, id=document_id, uploaded_by=request.user)
+        design_document_form = EditDesignDocumentForm(request.POST, instance=design_document)
+        document_package = None
+
+        if design_document_form.is_valid():
+            design_document_form.save(request)
+
+            if design_document.has_download:
+                document_package = DesignDocumentPackage.objects.get(design_document=design_document)
+
+        context = {
+            'document': design_document,
+            'design_document_form': design_document_form,
+            'document_package': document_package
+        }
+
+        return render(request, self.template_name, context)
+

@@ -3,25 +3,110 @@
 
 {% block content %}
 
-    {% include 'partials/page-header.html' with page_title='Edit Document' %}
-
-    <div class="row">
+    {% include 'partials/page-header.html' with page_title='Edit Document' subtitle=document.title %}
+    <!--<div class="row">
         <div class="col m8 s12">
-            {% include 'partials/form.html' with action_url='upload' form=design_document_form button_text='Save' %}
+            {% include 'core/design-documents/edit-design-document-form.html' with document_id=document.id form=design_document_form %}
         </div>
         <div class="col m4 s12">
             <div class="image-list">
                 {% for image in document.images.all %}
                    <img class="materialboxed" src="{{ image.image_url }}">
                 {% endfor %}
+
             </div>
         </div>
-    </div>
+    </div>-->
+    {% include 'partials/documents/document-modify.html' with document=document form=design_document_form %}
 {% endblock %}
 
 {% block scripts %}
+<script rel="text/javascript" src="{% static 'javascript/s3/signS3Image.js' %}"></script>
+<script rel="text/javascript" src="{% static 'javascript/utility/messages.js' %}"></script>
+<script rel="text/javascript" src="{% static 'javascript/utility/helpers.js' %}"></script>
 <script>
     var selectElements = $('select');
+    var imageFileInput = $('#id_image_upload');
+    var hiddenImageFileInput = $('#id_document_images');
+    var hiddenRemovedImageFileInput = $('#id_document_images_to_remove');
+    var hiddenAssetFileInput = $('#id_asset_url');
+    var fileUrls = [];
+    var removedImageUrls = [];
+
     selectElements.selectize();
+    handleFileUpload(imageFileInput[0], attachImageToDom, errorCallback(imageFileInput[0]));
+    // handleFileUpload(assetFileInput[0], handleAssetUrl, errorCallback(assetFileInput[0]));
+    $('.remove-image').click(toggleRemoveImage);
+
+    function attachImageToDom(url) {
+        var wrapper = $('#user-uploaded-images');
+        var newImage = $('<img class="materialboxed z-depth-2" src="' + url + '">');
+
+        removeUploadPhotosHelpText();
+        wrapper.append(newImage);
+        newImage.materialbox();
+
+        addImageUrlToForm(url);
+    }
+
+    function addImageUrlToForm(url) {
+        fileUrls.push(url);
+        updateFormImageFiles();
+    }
+
+    function addRemovedImageToForm(url) {
+        removedImageUrls.push(url);
+        updateFormRemovedImageFiles(url);
+    }
+
+    function updateFormImageFiles() {
+        hiddenImageFileInput[0].value = JSON.stringify(fileUrls);
+    }
+
+    function updateFormRemovedImageFiles() {
+        hiddenRemovedImageFileInput[0].value = JSON.stringify(removedImageUrls);
+        console.log(hiddenRemovedImageFileInput[0].value)
+    }
+
+    function handleAssetUrl(url) {
+        hiddenAssetFileInput[0].value = JSON.stringify(url);
+    }
+
+    function removeUploadPhotosHelpText() {
+        $('.user-uploaded-images .help-text').remove();
+    }
+
+    function errorCallback(fileInput) {
+        return function(message) {
+            clearFileInput(fileInput);
+            createToast(message, 2000);
+        }
+    }
+
+    function toggleRemoveImage(event) {
+        var imageEl = $(event.target).parent().find('img');
+        var isRemoved = imageEl.hasClass('removed');
+        var imageUrl = imageEl.attr('src');
+
+        imageEl.toggleClass('removed');
+
+        updateRemovedImageUrls(imageUrl);
+    }
+
+    function updateRemovedImageUrls(url) {
+        var indexOfFileUrl = removedImageUrls.indexOf(url);
+        var fileIsMarkedForRemoval = indexOfFileUrl !== -1;
+
+        if (!fileIsMarkedForRemoval) {
+            removedImageUrls.push(url);
+            updateFormRemovedImageFiles();
+            createToast('Image removed.');
+        } else {
+            removedImageUrls.splice(indexOfFileUrl, 1);
+            updateFormRemovedImageFiles();
+            createToast('Image re-added.');
+        }
+    }
+
 </script>
 {% endblock %}

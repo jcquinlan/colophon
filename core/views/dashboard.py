@@ -10,7 +10,7 @@ class DashboardView(LoginRequiredMixin, View):
     template_name = 'core/dashboard.html'
 
     def get(self, request):
-        all_documents = DesignDocument.objects.all()
+        all_documents = DesignDocument.objects.all().order_by('-created_at')
         paginator = Paginator(all_documents, 10)
 
         page = request.GET.get('page')

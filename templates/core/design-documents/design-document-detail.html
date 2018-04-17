@@ -16,6 +16,7 @@
                     </div>
                 </div>
                 <div class="document-interactions">
+                    {% if document_package %}
                     <a href="{{ document_package.package_url }}" download>
                         <button class="btn tooltipped"
                             data-position="bottom"
@@ -25,6 +26,7 @@
                             <i class="fas fa-cloud-download-alt"></i>
                         </button>
                     </a>
+                    {% endif %}
                 </div>
             </div>
 

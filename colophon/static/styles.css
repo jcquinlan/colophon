@@ -106,6 +106,7 @@ nav ul a:hover {
 }
 .tabs .tab a {
     color: #000;
+    text-decoration: none;
 }
 .tabs .tab a:hover,
 .tabs .tab a.active {
@@ -396,6 +397,11 @@ button:focus {
      margin: 0;
      text-align: center;
  }
+ .page-header h4 {
+     text-align: center;
+     font-size: 1.5em;
+     color: #aaa;
+ }
 
 /* Document Cards */
 .document-card {
@@ -506,6 +512,25 @@ button:focus {
    height: 200px;
    width: auto;
    margin-right: 10px;
+}
+.user-uploaded-images img.removed {
+    opacity: 0.1;
+}
+.user-uploaded-images img.removed.active {
+    opacity: 1;
+}
+.user-uploaded-images .image-container .remove-image {
+    margin-top: 10px;
+    width: 40px;
+    height: 40px;
+    transition: 0.3s;
+
+    background-color: #ff3535;
+    opacity: 0.2;
+    color: #fff;
+}
+.user-uploaded-images .image-container:hover .remove-image {
+    opacity: 1;
 }
 
 /* Dashboard */

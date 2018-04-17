@@ -19,8 +19,6 @@ function handleFileUpload(fileInput, successCallback, errorCallback) {
     function getSignedRequest(file){
         var xhr = new XMLHttpRequest();
 
-        console.log(file.type);
-
         xhr.open("GET", "/sign_s3?file_name=" +
             encodeURIComponent(file.name) +
             "&file_type=" +
