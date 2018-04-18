@@ -19,12 +19,12 @@
             </div>
         </div>
 
-        <!-- List of images uploaded by the user -->
-        {% if not document.images.all %}
-        <p class="help-text">Please upload up to 3 images of the document.</p>
-        {% endif %}
-
         <div class="user-uploaded-images" id="user-uploaded-images">
+            <!-- List of images uploaded by the user -->
+            {% if not document.images.all %}
+            <p class="help-text">Please upload up to 3 images of the document.</p>
+            {% endif %}
+
             {% if document %}
                 {% for image in document.images.all %}
                     <div class="image-container">
@@ -56,7 +56,10 @@
     </div>
     
     <div id="document-specifics" class="col s12">
-        <!-- Form containing specifics -->
-        {% include 'partials/form.html' with action_url='upload' form=form button_text='Upload' %}
+        {% if document_id %}
+            {% include 'partials/forms/edit-document-form.html' with action_url='design_document_edit' document_id=document_id form=form button_text=button_text %}
+        {% else %}
+            {% include 'partials/form.html' with action_url='upload' form=form button_text='Upload' %}
+        {% endif %}
     </div>
 </div>

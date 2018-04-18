@@ -3,7 +3,7 @@
 
 {% block content %}
     {% include 'partials/page-header.html' with page_title='Upload New Document' %}
-    {% include 'partials/documents/document-modify.html' with form=form %}
+    {% include 'partials/documents/modify-document.html' with form=form %}
 {% endblock %}
 
 {% block scripts %}
@@ -35,7 +35,6 @@
             fileUrls.push(url);
             updateFormImageFiles();
         }
-
 
         function updateFormImageFiles() {
             hiddenImageFileInput[0].value = JSON.stringify(fileUrls);

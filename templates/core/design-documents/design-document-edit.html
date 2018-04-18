@@ -2,22 +2,8 @@
 {% load static %}
 
 {% block content %}
-
     {% include 'partials/page-header.html' with page_title='Edit Document' subtitle=document.title %}
-    <!--<div class="row">
-        <div class="col m8 s12">
-            {% include 'core/design-documents/edit-design-document-form.html' with document_id=document.id form=design_document_form %}
-        </div>
-        <div class="col m4 s12">
-            <div class="image-list">
-                {% for image in document.images.all %}
-                   <img class="materialboxed" src="{{ image.image_url }}">
-                {% endfor %}
-
-            </div>
-        </div>
-    </div>-->
-    {% include 'partials/documents/document-modify.html' with document=document form=design_document_form %}
+    {% include 'partials/documents/modify-document.html' with form=design_document_form document_id=document.id button_text="Save" %}
 {% endblock %}
 
 {% block scripts %}
