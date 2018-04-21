@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
+{% if not user.is_authenticated %}
+    {% block banner %}
+        <div class="top-banner">
+            colofont is for finding and sharing book designs. Make an account, or read more about us.
+        </div>
+    {% endblock %}
+{% endif %}
+
 {% block content %}
     {% include 'partials/page-header.html' with page_title='Dashboard' paginator=documents %}
 

@@ -50,8 +50,16 @@
             </div>
         </div>
 
-        <div id="user-uploaded-asset">
-            <p class="help-text">Upload an InDesign file or zip file.</p>
+        <div class="user-uploaded-asset" id="user-uploaded-asset">
+            {% if document %}
+                {% if document.has_download %}
+                    <p class="preexisting-asset"><i class="far fa-file-archive"></i> Looks like you already have a file for this document.</p>
+                {% else %}
+                    <p class="help-text">Upload an InDesign file or zip file.</p>
+                {% endif %}
+            {% else %}
+                <p class="help-text">Upload an InDesign file or zip file.</p>
+            {% endif %}
         </div>
     </div>
     

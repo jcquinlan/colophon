@@ -6,7 +6,7 @@ from core.forms.create_design_document_form import CreateDesignDocumentForm
 
 from core.models import DesignDocument
 
-class DashboardView(LoginRequiredMixin, View):
+class DashboardView(View):
     template_name = 'core/dashboard.html'
 
     def get(self, request):

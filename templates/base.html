@@ -18,6 +18,7 @@
     </head>
     <body>
         {% include 'partials/nav/nav.html' %}
+        {% block banner %}{% endblock %}
         <div class="container content-wrapper">
             {% block content %}{% endblock %}
         </div>

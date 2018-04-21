@@ -137,7 +137,7 @@ input[type=datetime-local]:not(.browser-default),
 input[type=tel]:not(.browser-default),
 input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
-textarea.materialize-textarea {
+textarea {
     /*width: 100%;*/
     padding: 0 10px;
     border: 1px solid #eee;
@@ -161,7 +161,7 @@ input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
 input[type=tel]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]) {
+textarea:focus:not([readonly]) {
     border-bottom: 1px solid #ccc;
     box-shadow: none;
     outline: none;
@@ -192,7 +192,7 @@ input[type=search].valid:not(.browser-default),
 input[type=search].valid:not(.browser-default):focus,
 textarea.materialize-textarea.valid,
 textarea.materialize-textarea.valid:focus,
-.select-wrapper.valid>input.select-dropdown {
+.select-wrapper.valid > input.select-dropdown {
     border-bottom: 1px solid #e88512;
     -webkit-box-shadow: 0 1px 0 0 #e88512;
     box-shadow: 0 1px 0 0 #e88512;
@@ -328,6 +328,15 @@ button:focus {
 }
 .secondary-information p:last-child {
     border: none;
+}
+
+/* Banner */
+/**********/
+.top-banner {
+    padding: 20px;
+    text-align: center;
+    background-color: #F5901A;
+    color: #fff;
 }
 
 /* Tables */
@@ -531,6 +540,11 @@ button:focus {
 }
 .user-uploaded-images .image-container:hover .remove-image {
     opacity: 1;
+}
+
+/* User Added Asset */
+.user-uploaded-asset {
+    text-align: center;
 }
 
 /* Dashboard */

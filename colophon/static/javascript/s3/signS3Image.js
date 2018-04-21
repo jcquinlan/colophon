@@ -1,4 +1,28 @@
-function handleFileUpload(fileInput, successCallback, errorCallback) {
+var fileTypeValidators = {
+    image: imageFileValidation,
+    asset: assetValidation
+};
+
+var fileTypeParams = {
+    image: {
+        file_type: 'image/jpeg'
+    },
+    asset: {
+        file_type: 'application/x-indesign'
+    }
+}
+
+function imageFileValidation(files) {
+    if (files.length > 3) {
+        throw 'You may only upload three images';
+    }
+}
+
+function assetValidation() {
+    return;
+}
+
+function handleFileUpload(fileType, fileInput, successCallback, errorCallback) {
     fileInput.onchange = function(){
         var files = fileInput.files;
 
@@ -6,13 +30,15 @@ function handleFileUpload(fileInput, successCallback, errorCallback) {
             return alert("No file selected.");
         }
 
-        if (files.length > 3) {
-            if (errorCallback) errorCallback('You may only upload three images');
+        try {
+            fileTypeValidators[fileType](files);
+        } catch (e) {
+            errorCallback(e);
             return;
         }
 
         for (var i = 0; i < files.length; i++) {
-            getSignedRequest(files[i]);
+            getSignedRequest(files[i], fileType);
         }
     };
 
@@ -21,8 +47,7 @@ function handleFileUpload(fileInput, successCallback, errorCallback) {
 
         xhr.open("GET", "/sign_s3?file_name=" +
             encodeURIComponent(file.name) +
-            "&file_type=" +
-            'application/x-indesign'
+            buildUrlParams(fileType)
         );
 
         xhr.onreadystatechange = function() {
@@ -30,15 +55,25 @@ function handleFileUpload(fileInput, successCallback, errorCallback) {
                 if (xhr.status === 200) {
                     var response = JSON.parse(xhr.responseText);
                     uploadFile(file, response.data, response.url);
-                }
-
-                else {
+                } else {
                     errorCallback("Could not get signed URL.");
                 }
             }
         };
 
         xhr.send();
+    }
+
+    function buildUrlParams() {
+        var paramObject = fileTypeParams[fileType];
+        var esc = encodeURIComponent;
+        var formattedParams = Object.keys(paramObject)
+            .map(function(key) {
+                return esc(key) + '=' + esc(paramObject[key]);
+            })
+            .join('&');
+
+        return formattedParams ? '&' + formattedParams : '';
     }
 
     function uploadFile(file, s3Data, url){

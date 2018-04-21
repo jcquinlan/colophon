@@ -55,7 +55,7 @@
             }
         }
 
-        handleFileUpload(imageFileInput[0], attachImageToDom, errorCallback(imageFileInput[0]))
-        handleFileUpload(assetFileInput[0], handleAssetUrl, errorCallback(assetFileInput[0]))
+        handleFileUpload('image', imageFileInput[0], attachImageToDom, errorCallback(imageFileInput[0]))
+        handleFileUpload('asset', assetFileInput[0], handleAssetUrl, errorCallback(assetFileInput[0]))
     </script>
 {% endblock %}
