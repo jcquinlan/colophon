@@ -33,7 +33,14 @@ class DesignDocumentEditView(LoginRequiredMixin, View):
             design_document_form.save(request)
 
             if design_document.has_download:
-                document_package = DesignDocumentPackage.objects.get(design_document=design_document)
+                document_package = DesignDocumentPackage \
+                    .objects.get(design_document=design_document)
+
+            # Redirect to the detail page, with message param for successful edit
+            return redirect("%s?m=es" % reverse(
+                'design_document_detail',
+                args=(design_document.id,)
+            ))
 
         context = {
             'document': design_document,

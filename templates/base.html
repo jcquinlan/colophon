@@ -30,6 +30,12 @@
         // GLOBALS
         var CONTEXT = '{{ CONTEXT }}'; // Originating from custom context_processor
         var BASEURL; // Set in setup.js
+
+
+        // MESSAGES
+        {% if MESSAGE %}
+            createToast('{{ MESSAGE }}', 2000);
+        {% endif %}
     </script>
     <script rel="text/javascript" src="{% static 'javascript/setup.js' %}"></script>
     {% block scripts %}{% endblock %}
