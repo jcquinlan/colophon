@@ -8,12 +8,10 @@
 
 {% block scripts %}
 <script rel="text/javascript" src="{% static 'javascript/s3/signS3Image.js' %}"></script>
-<script rel="text/javascript" src="{% static 'javascript/utility/messages.js' %}"></script>
-<script rel="text/javascript" src="{% static 'javascript/utility/helpers.js' %}"></script>
 <script>
     var selectElements = $('select');
     var imageFileInput = $('#id_image_upload');
-    var imageAssetInput = $('#id_asset_upload');
+    var assetFileInput = $('#id_asset_upload');
     var hiddenImageFileInput = $('#id_document_images');
     var hiddenRemovedImageFileInput = $('#id_document_images_to_remove');
     var hiddenAssetFileInput = $('#id_asset_url');
@@ -21,8 +19,8 @@
     var removedImageUrls = [];
 
     selectElements.selectize();
-    handleFileUpload(imageFileInput[0], attachImageToDom, errorCallback(imageFileInput[0]));
-    // handleFileUpload(assetFileInput[0], handleAssetUrl, errorCallback(assetFileInput[0]));
+    handleFileUpload('image', imageFileInput[0], attachImageToDom, errorCallback(imageFileInput[0]));
+    handleFileUpload('asset', assetFileInput[0], handleAssetUrl, errorCallback(assetFileInput[0]));
     $('.remove-image').click(toggleRemoveImage);
 
     function attachImageToDom(url) {

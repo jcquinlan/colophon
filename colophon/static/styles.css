@@ -3,6 +3,7 @@
 /*
  * Primary: #F5901A
  * Primary Darker: #e88512
+ * Primary Accent: #f15c41
  * Secondary: #455C7B
  * Secondary Darker: #3c4f68
  * Danger: #ff3535
@@ -60,7 +61,7 @@ nav {
     border-bottom: 1px solid #ddd;
 }
 nav .upload-button {
-    background-color: #F5901A;
+    background-color: #f17341;
 }
 nav .upload-button a {
     color: #fff;
@@ -335,7 +336,7 @@ button:focus {
 .top-banner {
     padding: 20px;
     text-align: center;
-    background-color: #F5901A;
+    background-image: linear-gradient(to right,#F5901A,#f15c41);
     color: #fff;
 }
 

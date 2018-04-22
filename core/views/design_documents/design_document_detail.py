@@ -1,4 +1,5 @@
 from django.views import View
+from django.http import JsonResponse
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -20,3 +21,15 @@ class DesignDocumentDetailView(LoginRequiredMixin, View):
         }
 
         return render(request, self.template_name, context)
+
+    def delete(self, request, document_id):
+        design_document = DesignDocument.objects.get(id=document_id)
+
+        if design_document:
+            design_document.delete()
+
+            return JsonResponse({'message': 'Document deleted'}, status=204)
+        else:
+            return JsonResponse({'message': 'Document not found'}, status=404)
+
+

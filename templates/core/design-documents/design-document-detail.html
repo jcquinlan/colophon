@@ -87,14 +87,56 @@
         </div>
 
 
-        {% if document.uploaded_by == request.user %}
+        {% if document.uploaded_by == user %}
         <div class="col s12">
             <div class="owner-controls">
                 <a href="{% url 'design_document_edit' document_id=document.id %}"><button class="btn primary">Edit</button></a>
-                <button class="btn danger">Delete</button>
+                <a href="#delete-document-modal" class="btn danger modal-trigger">Delete</a>
             </div>
         </div>
         {% endif %}
     </div>
 </div>
+
+ <div id="delete-document-modal" class="modal">
+    <div class="modal-content">
+      <h4>Delete Document?</h4>
+      <p>Deleting this document will permanently remove it from colofont. Are you sure you want to proceed?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="delete-document-button" class="btn danger modal-action modal-close">Yeah, delete it</a>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var modalOptions = {
+        inDuration: 50,
+        outDuration: 50
+    };
+
+    $(document).ready(function(){
+        $('.modal').modal(modalOptions);
+        $('#delete-document-button').click(deleteDocument);
+    }); 
+
+    function deleteDocument() {
+        $.ajax({
+            'url': BASEURL + window.location.pathname,
+            'type': 'DELETE',
+            'success': onDeleteSuccess,
+            'error': onDeleteError
+        });
+    }
+
+    function onDeleteSuccess(data) {
+        console.log(data);
+        window.location.replace(BASEURL);
+    }
+
+    function onDeleteError(request, error) {
+        createToast('There was a problem deleting this document.');
+    }
+</script>
 {% endblock %}

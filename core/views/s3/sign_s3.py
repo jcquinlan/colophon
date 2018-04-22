@@ -13,7 +13,7 @@ class SignS3View(LoginRequiredMixin, View):
         file_name = request.GET.get('file_name')
         file_type = request.GET.get('file_type')
 
-        s3_client= boto3.client('s3')
+        s3_client = boto3.client('s3')
 
         presigned_post = s3_client.generate_presigned_post(
             Bucket=S3_BUCKET_NAME,
