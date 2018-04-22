@@ -28,7 +28,7 @@
             {% if document %}
                 {% for image in document.images.all %}
                     <div class="image-container">
-                        <img class="materialboxed z-depth-2" src="{{ image.image_url }}">
+                        <img data-image-id="{{ image.id }}" class="materialboxed z-depth-2" src="{{ image.image_url }}">
                         <button class="remove-image">
                             <i class="far fa-trash-alt"></i>
                         </button>

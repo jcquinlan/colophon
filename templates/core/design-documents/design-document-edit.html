@@ -15,42 +15,47 @@
     var hiddenImageFileInput = $('#id_document_images');
     var hiddenRemovedImageFileInput = $('#id_document_images_to_remove');
     var hiddenAssetFileInput = $('#id_asset_url');
-    var fileUrls = [];
-    var removedImageUrls = [];
+    var wrapper = $('#user-uploaded-images');
+    var newImageUrls = [];
+    var removedImageIds = [];
 
     selectElements.selectize();
     handleFileUpload('image', imageFileInput[0], attachImageToDom, errorCallback(imageFileInput[0]));
     handleFileUpload('asset', assetFileInput[0], handleAssetUrl, errorCallback(assetFileInput[0]));
-    $('.remove-image').click(toggleRemoveImage);
+    $(document.body).on('click', '.remove-image', toggleRemoveImage);
 
     function attachImageToDom(url) {
-        var wrapper = $('#user-uploaded-images');
-        var newImage = $('<img class="materialboxed z-depth-2" src="' + url + '">');
+        var newImage = $(
+            '<div class="image-container">' +
+                 '<img data-unsaved="true" class="materialboxed z-depth-2" src="' + url + '">' +
+                 '<button class="remove-image">' +
+                     '<i class="far fa-trash-alt"></i>' +
+                 '</button>' +
+             '</div>');
 
         removeUploadPhotosHelpText();
         wrapper.append(newImage);
-        newImage.materialbox();
+        newImage.find('img').materialbox();
 
         addImageUrlToForm(url);
     }
 
     function addImageUrlToForm(url) {
-        fileUrls.push(url);
-        updateFormImageFiles();
+        newImageUrls.push(url);
+        updateFormImageUrls(url);
     }
 
     function addRemovedImageToForm(url) {
-        removedImageUrls.push(url);
+        removedImageIds.push(url);
         updateFormRemovedImageFiles(url);
     }
 
-    function updateFormImageFiles() {
-        hiddenImageFileInput[0].value = JSON.stringify(fileUrls);
+    function updateFormImageUrls() {
+        hiddenImageFileInput[0].value = JSON.stringify(newImageUrls);
     }
 
     function updateFormRemovedImageFiles() {
-        hiddenRemovedImageFileInput[0].value = JSON.stringify(removedImageUrls);
-        console.log(hiddenRemovedImageFileInput[0].value)
+        hiddenRemovedImageFileInput[0].value = JSON.stringify(removedImageIds);
     }
 
     function handleAssetUrl(url) {
@@ -70,24 +75,46 @@
 
     function toggleRemoveImage(event) {
         var imageEl = $(event.target).parent().find('img');
-        var isRemoved = imageEl.hasClass('removed');
+        var isUnsaved = imageEl.data('unsaved');
+        var imageId = imageEl.data('image-id');
         var imageUrl = imageEl.attr('src');
 
         imageEl.toggleClass('removed');
 
-        updateRemovedImageUrls(imageUrl);
+        if (isUnsaved) {
+            updateImageUrls(imageUrl);
+        } else {
+            updateRemovedImageIds(imageId);
+        }
     }
 
-    function updateRemovedImageUrls(url) {
-        var indexOfFileUrl = removedImageUrls.indexOf(url);
-        var fileIsMarkedForRemoval = indexOfFileUrl !== -1;
+    function updateImageUrls(url) {
+        var indexOfNewImageUrl = newImageUrls.indexOf(url);
+        var fileIsMarkedForRemoval = indexOfNewImageUrl === -1;
+
+        console.log(newImageUrls)
 
         if (!fileIsMarkedForRemoval) {
-            removedImageUrls.push(url);
+            newImageUrls.splice(indexOfNewImageUrl, 1);
+            createToast('Image removed.');
+        } else {
+            newImageUrls.push(url);
+            createToast('Image re-added.');
+        }
+
+        updateFormImageUrls();
+    }
+
+    function updateRemovedImageIds(id) {
+        var indexOfFileId = removedImageIds.indexOf(id);
+        var fileIsMarkedForRemoval = indexOfFileId !== -1;
+
+        if (!fileIsMarkedForRemoval) {
+            removedImageIds.push(id);
             updateFormRemovedImageFiles();
             createToast('Image removed.');
         } else {
-            removedImageUrls.splice(indexOfFileUrl, 1);
+            removedImageIds.splice(indexOfFileId, 1);
             updateFormRemovedImageFiles();
             createToast('Image re-added.');
         }

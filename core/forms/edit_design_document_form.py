@@ -61,10 +61,10 @@ class EditDesignDocumentForm(forms.ModelForm):
 
             design_document.images.add(design_document_image)
 
-        for url in document_images_to_remove:
+        for image_id in document_images_to_remove:
             design_document_images = DesignDocumentImage.objects.filter(
+                id=image_id,
                 design_document=design_document,
-                image_url=url
             )
 
             if design_document_images:
