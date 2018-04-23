@@ -1,6 +1,6 @@
 import json
 from django import forms
-from core.models import DesignDocument, DesignDocumentImage
+from core.models import DesignDocument, DesignDocumentImage, DesignDocumentPackage
 
 class EditDesignDocumentForm(forms.ModelForm):
     document_images = forms.CharField(widget=forms.HiddenInput(), required=False, label='')
@@ -15,6 +15,44 @@ class EditDesignDocumentForm(forms.ModelForm):
     class Meta:
         model = DesignDocument
         exclude = ['uploaded_by', 'created_at', 'has_download', 'has_assets',]
+
+    def is_valid(self):
+        valid = super(EditDesignDocumentForm, self).is_valid()
+
+        if not valid:
+            return valid
+
+        design_document = self.instance
+        removing_too_many_images = False
+        trying_to_remove_asset = False
+
+        images_string = self.data['document_images']
+        document_images_to_remove_string = self.data['document_images_to_remove']
+        asset_url_string = self.data['asset_url']
+        asset_url_to_remove_string = self.data['asset_url_to_remove']
+
+        images = json.loads(images_string) if images_string else []
+        document_images_to_remove = json.loads(document_images_to_remove_string) if \
+            document_images_to_remove_string else []
+
+        asset_url = json.loads(asset_url_string) if asset_url_string else None
+        asset_url_to_remove = json.loads(asset_url_to_remove_string) if \
+            asset_url_to_remove_string else None
+
+        # If the user is trying to remove all their images
+        if len(document_images_to_remove) >= len(design_document.images.all()):
+            removing_too_many_images = True
+            self.add_error(None, 'You must leave at least one image.')
+
+        # If the user is trying to remove an asset without also providing one
+        if asset_url_to_remove and not asset_url:
+            trying_to_remove_asset = True
+            self.add_error(None, 'You cannot remove an asset without providing a new one.')
+
+        if removing_too_many_images or trying_to_remove_asset:
+            return False
+
+        return valid
 
     def save(self, request):
         data = self.cleaned_data
