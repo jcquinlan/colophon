@@ -4,6 +4,7 @@
  * Primary: #F5901A
  * Primary Darker: #e88512
  * Primary Accent: #f15c41
+ * Light Accent: #ffeae6
  * Secondary: #455C7B
  * Secondary Darker: #3c4f68
  * Danger: #ff3535
@@ -250,6 +251,14 @@ button:focus {
 
 /* UTILITY */
 /***********/
+.form-error-list {
+    margin-bottom: 20px;
+}
+.form-error {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ffeae6;
+}
 .help-text {
     font-size: 1em;
     color: #aaa;

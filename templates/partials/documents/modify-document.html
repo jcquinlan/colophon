@@ -1,5 +1,15 @@
 <div class="row">
     <div class="col s12">
+        <div class="form-error-list">
+        {% for error in form.non_field_errors %}
+            <div class="form-error">
+                {{ error }}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="col s12">
         <ul class="tabs">
             <li class="tab col s4"><a href="#document-images">1. Images</a></li>
             <li class="tab col s4"><a href="#document-asset">2. Asset</a></li>

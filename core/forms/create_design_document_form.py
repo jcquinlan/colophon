@@ -10,6 +10,31 @@ class CreateDesignDocumentForm(forms.ModelForm):
         model = DesignDocument
         exclude = ['uploaded_by', 'created_at', 'has_download', 'has_assets', 'weights']
 
+    def is_valid(self):
+        valid = super(CreateDesignDocumentForm, self).is_valid()
+        missing_images = False
+        missing_asset = False
+
+        if not valid:
+            return valid
+
+        images = self.data['document_images']
+        asset_url = self.data['asset_url']
+
+        if not len(images):
+            missing_images = True
+            self.add_error(None, 'At least one image is required.')
+
+        if not len(asset_url):
+            missing_asset = True
+            self.add_error(None, 'An InDesign or zip file of the document is required.')
+
+        if missing_asset or missing_images:
+            return False
+
+        return valid
+
+
     def save(self, request):
         data = self.cleaned_data
         # Mutably move the file urls from the cleaned data
