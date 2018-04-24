@@ -452,12 +452,11 @@ button:focus {
 }
 .document-card .sidebar .sidebar-section {
     margin-bottom: 30px;
-    text-align: center;
 }
 .document-card .sidebar .sidebar-section p {
     margin: 0;
     font-weight: 700;
-    font-size: 1em;
+    font-size: .9em;
 }
 .document-card:hover .sidebar {
     opacity: 1;

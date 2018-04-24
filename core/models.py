@@ -71,6 +71,36 @@ class DesignDocument(models.Model):
     weights = SeparatedValuesField(choices=weight_choices, token=',', max_length=150, null=True, blank=True)
     binding_method = models.CharField(choices=binding_choices, max_length=128, null=True, blank=True)
 
+    @staticmethod
+    def format_measurement(dimension1, dimension2, units=""):
+        if dimension1 and dimension2:
+            return "%s x %s %s" % (dimension1, dimension2, units)
+
+        return 'NA'
+
+    @property
+    def baseline_grid_display(self):
+        if not self.baseline_grid:
+            return 'NA'
+
+        return "%s pts." % (self.baseline_grid,)
+
+    @property
+    def margins_top_bottom(self):
+        if not self.margin_top or not self.margin_bottom:
+            return "NA"
+
+        return "%s / %s in." % (self.margin_top, self.margin_bottom)
+
+    @property
+    def document_grid(self):
+        return self.format_measurement(self.document_grid_x, self.document_grid_y)
+
+    @property
+    def page_dimensions(self):
+        return self.format_measurement(self.page_dimension_x, self.page_dimension_y, "in.")
+
+
 
 class DesignDocumentImage(models.Model):
     design_document = models.ForeignKey(DesignDocument, related_name="images", on_delete=models.CASCADE)

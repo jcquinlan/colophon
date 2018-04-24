@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load format_font_name_filter %}
 
 {% block content %}
 <div class="page document-detail">
@@ -40,7 +41,7 @@
 
             <ul class="fonts-list">
                 {% for typeface in document.typefaces %}
-                <li>{{ typeface }}</li>
+                <li>{{ typeface|format_font_name }}</li>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -53,18 +54,16 @@
             <div class="rtable">
                 <div class="rtable-header">
                     <div style="order:1;" class="cell">Baseline</div>
-                    <div style="order:2;" class="cell">Size</div>
-                    <div style="order:3;" class="cell">Gutter</div>
-                    <div style="order:4;" class="cell">Page Size</div>
-                    <div style="order:5;" class="cell">Margins</div>
+                    <div style="order:2;" class="cell">Document Grid</div>
+                    <div style="order:3;" class="cell">Page Dimensions</div>
+                    <div style="order:4;" class="cell">Margins Top/Bottom</div>
                 </div>
 
                 <div class="rtable-row">
-                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
-                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
-                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
-                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
-                    <div style="order:1;" class="cell">{{ document.baseline_grid }}</div>
+                    <div style="order:1;" class="cell">{{ document.baseline_grid_display }}</div>
+                    <div style="order:1;" class="cell">{{ document.document_grid }}</div>
+                    <div style="order:1;" class="cell">{{ document.page_dimensions }}</div>
+                    <div style="order:1;" class="cell">{{ document.margins_top_bottom }}</div>
                 </div>
             </div>
 
