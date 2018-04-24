@@ -26,18 +26,9 @@ class EditDesignDocumentForm(forms.ModelForm):
         removing_too_many_images = False
         trying_to_remove_asset = False
 
-        images_string = self.data['document_images']
-        document_images_to_remove_string = self.data['document_images_to_remove']
-        asset_url_string = self.data['asset_url']
-        asset_url_to_remove_string = self.data['asset_url_to_remove']
-
-        images = json.loads(images_string) if images_string else []
-        document_images_to_remove = json.loads(document_images_to_remove_string) if \
-            document_images_to_remove_string else []
-
-        asset_url = json.loads(asset_url_string) if asset_url_string else None
-        asset_url_to_remove = json.loads(asset_url_to_remove_string) if \
-            asset_url_to_remove_string else None
+        document_images_to_remove = self.pull_and_parse_attr('document_images_to_remove', [])
+        asset_url = self.pull_and_parse_attr('asset_url', None)
+        asset_url_to_remove = self.pull_and_parse_attr('asset_url_to_remove', None)
 
         # If the user is trying to remove all their images
         if len(document_images_to_remove) >= len(design_document.images.all()):
@@ -59,18 +50,9 @@ class EditDesignDocumentForm(forms.ModelForm):
         design_document = super(EditDesignDocumentForm, self).save(commit=False)
 
         # Mutably move the file urls from the cleaned data
-        file_urls_string = data.pop('document_images')
-        asset_url_string = data.pop('asset_url')
-        document_images_to_remove_string = data.pop('document_images_to_remove')
-
-        # When editing a file, these fields will be empty, since the values of the inputs
-        # need to be manually set, as they are hidden. This means that editing a design_document
-        # does not duplicate the fule_urls or asset_url over and over.
-        file_urls = json.loads(file_urls_string) if file_urls_string else []
-        asset_url = json.loads(asset_url_string) if asset_url_string else None
-
-        document_images_to_remove = json.loads(document_images_to_remove_string) \
-            if document_images_to_remove_string else []
+        file_urls = self.pull_and_parse_attr('document_images', [])
+        asset_url = self.pull_and_parse_attr('asset_url', None)
+        document_images_to_remove = self.pull_and_parse_attr('document_images_to_remove', [])
 
         # Assign the user that created/edited the document
         design_document.uploaded_by = request.user
@@ -111,3 +93,8 @@ class EditDesignDocumentForm(forms.ModelForm):
         design_document.save()
 
         return design_document
+
+    def pull_and_parse_attr(self, attr_name, default):
+        """Pulls an attribute from the uncleaned data and parses it into a useable value"""
+        string_val = self.data.get(attr_name)
+        return json.loads(string_val) if string_val else default

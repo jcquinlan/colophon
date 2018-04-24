@@ -439,6 +439,10 @@ button:focus {
     box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.28);
 } 
 .document-card .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     position: absolute;
     opacity: 0.2;
     transition: 0.3s;
@@ -457,6 +461,25 @@ button:focus {
 }
 .document-card:hover .sidebar {
     opacity: 1;
+}
+.document-card .sidebar .favorite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    font-size: 1.5em;
+    color: #f15c41;
+    cursor: pointer;
+}
+.document-card .sidebar .download-available {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    color: #fff;
+    font-size: 1.5em;
+    background-image: linear-gradient(to right,#F5901A,#f15c41);
+    cursor: pointer;
 }
 .document-card .image-count {
     position: absolute;
