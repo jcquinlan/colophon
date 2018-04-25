@@ -1,3 +1,5 @@
+{% load check_if_favorited_filter %}
+
 <div class="card document-card">
     <div class="image-count">
         <span class="current-image">1</span> / {{ document.images.all|length }}
@@ -24,12 +26,12 @@
                 <small class="section-header">Margins Top/Bottom</small>
                 <p>{{ document.margins_top_bottom }}</p>
             </div>
-
         </div>
 
         <div class="sidebar-lower">
-            <div class="favorite">
+            <div class="favorite" role="button" data-document-id="{{ document.id }}">
                 <i class="far fa-heart"></i>
+                <!--<small>{{ document|check_if_favorited:request.user }}</small>-->
             </div>
 
             <div class="download-available">

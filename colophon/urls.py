@@ -20,6 +20,7 @@ from core.views.dashboard import DashboardView
 from core.views.upload_design_document import UploadDesignDocumentView
 from core.views.design_documents.design_document_detail import DesignDocumentDetailView
 from core.views.design_documents.design_document_edit import DesignDocumentEditView
+from core.views.design_documents.design_document_favorite import DesignDocumentFavoriteView
 from core.views.profile.profile import ProfileView
 from core.views.profile.profile_posts import ProfilePostsView
 from core.views.s3.sign_s3 import SignS3View
@@ -31,7 +32,20 @@ urlpatterns = [
     path('upload/', UploadDesignDocumentView.as_view(), name='upload'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/posts/', ProfilePostsView.as_view(), name='profile_posts'),
-    path('document/<int:document_id>/', DesignDocumentDetailView.as_view(), name='design_document_detail'),
-    path('document/<int:document_id>/edit/', DesignDocumentEditView.as_view(), name='design_document_edit'),
+    path(
+        'document/<int:document_id>/',
+        DesignDocumentDetailView.as_view(),
+        name='design_document_detail'
+    ),
+    path(
+        'document/<int:document_id>/edit/',
+        DesignDocumentEditView.as_view(),
+        name='design_document_edit'
+    ),
+    path(
+        'document/<int:document_id>/favorite/',
+        DesignDocumentFavoriteView.as_view(),
+        name='design_document_favorite'
+    ),
     path('sign_s3/', SignS3View.as_view()),
 ]

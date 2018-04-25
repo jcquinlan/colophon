@@ -29,5 +29,30 @@
 {% block scripts %}
 <script>
     $('.carousel.carousel-slider').carousel({ fullWidth: true });
+
+    // Add click listener for favoriting a document
+    $('body').on('click', '.favorite', favoriteDocument);
+
+    function favoriteDocument(event) {
+        var button = $(event.target);
+        var documentId = button.hasClass('favorite') ?
+            button.data('document-id') :
+            button.parent().data('document-id');
+
+        $.ajax({
+            'url': BASEURL + '/document/' + documentId + '/favorite/',
+            'type': 'POST',
+            'success': onFavoriteSuccess,
+            'error': onFavoriteError
+        });
+    }
+
+    function onFavoriteSuccess(res) {
+        console.log(res);
+    }
+
+    function onFavoriteError(request, err) {
+        console.log(err);
+    }
 </script>
 {% endblock %}

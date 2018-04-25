@@ -1,10 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
+
 from separatedvaluesfield.models import SeparatedValuesField
-
 from core.misc.fonts.formatted_fonts import fonts
-
 
 weight_choices = (
     ('roman_regular', 'Roman/Regular'),
@@ -36,7 +35,6 @@ weight_choices = (
     ('mono', 'Mono'),
 )
 
-
 binding_choices = (
     ('perfect_binding', 'Perfect Binding'),
     ('saddle_stitch', 'Saddle Stitch'),
@@ -46,7 +44,6 @@ binding_choices = (
     ('pamphlet_stitch', 'Pamphlet Stitch'),
     ('stab_binding', 'Stab Binding')
 )
-
 
 class DesignDocument(models.Model):
     uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -70,6 +67,12 @@ class DesignDocument(models.Model):
     typefaces = SeparatedValuesField(choices=fonts, token=',', max_length=64, null=True, blank=True)
     weights = SeparatedValuesField(choices=weight_choices, token=',', max_length=150, null=True, blank=True)
     binding_method = models.CharField(choices=binding_choices, max_length=128, null=True, blank=True)
+
+    def is_favorited(self, user):
+        """Returns a boolean telling us if the relevant user has favorited this document"""
+        from core.models import UserDocumentFavorite
+
+        return UserDocumentFavorite.objects.filter(user=user, design_document=self).exists()
 
     @staticmethod
     def format_measurement(dimension1, dimension2, units=""):
@@ -98,16 +101,5 @@ class DesignDocument(models.Model):
 
     @property
     def page_dimensions(self):
+
         return self.format_measurement(self.page_dimension_x, self.page_dimension_y, "in.")
-
-
-
-class DesignDocumentImage(models.Model):
-    design_document = models.ForeignKey(DesignDocument, related_name="images", on_delete=models.CASCADE)
-    image_url = models.URLField(max_length=256)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-class DesignDocumentPackage(models.Model):
-    design_document = models.ForeignKey(DesignDocument, on_delete=models.CASCADE)
-    package_url = models.URLField(max_length=256)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
