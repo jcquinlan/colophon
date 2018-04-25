@@ -31,13 +31,11 @@
     $('.carousel.carousel-slider').carousel({ fullWidth: true });
 
     // Add click listener for favoriting a document
-    $('body').on('click', '.favorite', favoriteDocument);
+    $('.favorite i').click(favoriteDocument);
 
     function favoriteDocument(event) {
-        var button = $(event.target);
-        var documentId = button.hasClass('favorite') ?
-            button.data('document-id') :
-            button.parent().data('document-id');
+        var target = $(event.target);
+        var documentId = target.data('document-id');
 
         $.ajax({
             'url': BASEURL + '/document/' + documentId + '/favorite/',
@@ -45,14 +43,25 @@
             'success': onFavoriteSuccess,
             'error': onFavoriteError
         });
+
+        function onFavoriteSuccess(res) {
+            var iconClass = target.attr('class');
+            var toastMessage = 'Document favorited.';
+
+            if (iconClass === 'fas fa-heart') {
+                target.attr('class', 'far fa-heart');
+                toastMessage = 'Document unfavorited';
+            } else {
+                target.attr('class', 'fas fa-heart');
+            }
+
+            createToast(toastMessage);
+        }
+
+        function onFavoriteError(request, err) {
+            console.error(err);
+        }
     }
 
-    function onFavoriteSuccess(res) {
-        console.log(res);
-    }
-
-    function onFavoriteError(request, err) {
-        console.log(err);
-    }
 </script>
 {% endblock %}

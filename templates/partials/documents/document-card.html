@@ -29,9 +29,14 @@
         </div>
 
         <div class="sidebar-lower">
-            <div class="favorite" role="button" data-document-id="{{ document.id }}">
-                <i class="far fa-heart"></i>
-                <!--<small>{{ document|check_if_favorited:request.user }}</small>-->
+            <div class="favorite">
+                {% with is_favorited=document|check_if_favorited:request.user %}
+                    {% if is_favorited %}
+                        <i class="fas fa-heart" role="button" data-document-id="{{ document.id }}"></i>
+                    {% else %}
+                        <i class="far fa-heart" role="button" data-document-id="{{ document.id }}"></i>
+                    {% endif %}
+                {% endwith %}
             </div>
 
             <div class="download-available">
