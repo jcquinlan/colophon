@@ -1,0 +1,25 @@
+{% load check_if_favorited_filter %}
+
+<div class="card document-card">
+    <div class="card-image">
+        <div class="carousel carousel-slider">
+            {% for image in document.images.all %}
+                <a class="carousel-item"><img src="{{ image.image_url }}"></a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="card-content">
+        <!-- Card Header -->
+        <div class="content-header">
+            <div class="header-content">
+                <a href="{% url 'design_document_detail' document_id=document.id %}"><h4>{{ document.title }}</h4></a>
+
+                <div class="secondary-information">
+                    <p>{{ document.created_at|date:'M dS Y' }}</p>
+                    <p>30 likes</p>
+                    <p>134 downloads</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

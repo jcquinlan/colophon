@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% include 'partials/page-header.html' with page_title='Profile' %}
+    {% include 'partials/profile/profile-header.html' %}
 
     <div class="row">
-        <div class="col s12 document-information">
-            <a href="{% url 'profile_posts' %}"><button class="btn primary">Your Posts</button></a>
+        <div class="col s4"></div>
+        <div class="col s8">
+            {% for document in documents %}
+                {% include 'partials/documents/document-card-condensed.html' %} 
+            {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('.carousel.carousel-slider').carousel({ fullWidth: true });
+</script>
 {% endblock %}

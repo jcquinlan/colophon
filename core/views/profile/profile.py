@@ -8,6 +8,10 @@ class ProfileView(LoginRequiredMixin, View):
     template_name = 'core/profile/profile.html'
 
     def get(self, request):
-        context = {}
+        design_documents = DesignDocument.objects.filter(uploaded_by=request.user)
+
+        context = {
+            'documents': design_documents
+        }
 
         return render(request, self.template_name, context)
