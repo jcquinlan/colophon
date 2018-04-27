@@ -22,6 +22,7 @@ from core.views.design_documents.design_document_detail import DesignDocumentDet
 from core.views.design_documents.design_document_edit import DesignDocumentEditView
 from core.views.design_documents.design_document_favorite import DesignDocumentFavoriteView
 from core.views.profile.profile import ProfileView
+from core.views.profile.edit_profile import EditProfileView
 from core.views.profile.profile_posts import ProfilePostsView
 from core.views.s3.sign_s3 import SignS3View
 
@@ -31,6 +32,7 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('upload/', UploadDesignDocumentView.as_view(), name='upload'),
     path('profile/', ProfileView.as_view(), name='profile'),
+    path('profile/edit/', EditProfileView.as_view(), name='edit-profile'),
     path('profile/posts/', ProfilePostsView.as_view(), name='profile_posts'),
     path(
         'document/<int:document_id>/',

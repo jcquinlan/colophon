@@ -639,6 +639,11 @@ button:focus {
 .profile-header .profile-information {
     padding: 10px 20px;
 }
+.profile-header .profile-interactions {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
 .profile-filtering {
     text-align: right;
 }

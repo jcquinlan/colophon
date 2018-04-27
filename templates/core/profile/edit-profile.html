@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'partials/profile/profile-header.html' %}
+
+    <div class="row">
+        <div class="col s8 offset-s2">
+            {% include 'partials/form.html' with form=edit_profile_form action_url='edit-profile' button_text='Save' %}
+        </div>
+    </div>
+{% endblock %}
