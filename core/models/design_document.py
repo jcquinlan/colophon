@@ -82,6 +82,12 @@ class DesignDocument(models.Model):
         return 'NA'
 
     @property
+    def number_of_favorites(self):
+        from core.models import UserDocumentFavorite
+
+        return UserDocumentFavorite.objects.filter(design_document=self).count()
+
+    @property
     def baseline_grid_display(self):
         if not self.baseline_grid:
             return 'NA'

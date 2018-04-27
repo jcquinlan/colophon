@@ -4,11 +4,22 @@
     {% include 'partials/profile/profile-header.html' %}
 
     <div class="row">
-        <div class="col s4"></div>
+        <div class="col s2 offset-s1">
+            <div class="profile-filtering">
+                <h6>Filters</h6>
+                <ul class="profile-filters">
+                    <li class="{% if not filter_param %}active{% endif %}"><a href="{% url 'profile' %}">Uploads</a></li>
+                    <li class="{% if filter_param == 'favorites' %}active{% endif %}"><a href="{% url 'profile' %}?filter=favorites">Favorites</a></li>
+                    <li class="{% if filter_param == 'downloads' %}active{% endif %}"><a href="{% url 'profile' %}?filter=downloads">Downloads</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="col s8">
-            {% for document in documents %}
-                {% include 'partials/documents/document-card-condensed.html' %} 
-            {% endfor %}
+            <div class="document-list">
+                {% for document in documents %}
+                    {% include 'partials/documents/document-card-condensed.html' %} 
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

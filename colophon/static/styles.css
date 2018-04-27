@@ -27,8 +27,8 @@ h1, h2, h3, h4, h5, h6 {
 a {
     color: #000;
     text-decoration: underline;
-    text-decoration-color:  #F5901A;
-    -moz-text-decoration-color:  #F5901A;
+    text-decoration-color:  #f15c41;
+    -moz-text-decoration-color:  #f15c41;
 }
 img {
     width: 100%;
@@ -42,14 +42,14 @@ img {
 
 /* Buttons */
 .btn, .btn-large {
-    background-color: #F5901A;
+    background-color: #f15c41;
     border-radius: 0;
 }
 .btn:hover, .btn-large:hover {
-    background-color: #e88512;
+    background-color: #f15c41;
 }
 .btn:focus, .btn-large:focus, .btn-floating:focus {
-    background-color: #e88512;
+    background-color: #f15c41;
 }
 .btn a {
     color: #fff;
@@ -80,7 +80,7 @@ nav .brand-logo {
     text-decoration: none;
 }
  nav .brand-logo:hover {
-    text-shadow: 2px 2px #F5901A;
+    text-shadow: 2px 2px #f15c41;
  }
 nav .brand-logo span {
     color: #ccc;
@@ -99,7 +99,7 @@ nav ul a {
 }
 nav ul a:hover {
     background-color: transparent;
-    border-bottom: 3px solid #F5901A;
+    border-bottom: 3px solid #f15c41;
 }
 
 /* Tabs */
@@ -117,7 +117,7 @@ nav ul a:hover {
 .tabs .tab a.active {
     background-color: #fff;
     border: 1px solid #eee;
-    border-bottom: 2px solid #F5901A;
+    border-bottom: 2px solid #f15c41;
 }
 .tabs .indicator {
     display: none;
@@ -288,7 +288,7 @@ button:focus {
     font-size: 25px;
 }
 .interactions i.favorite {
-    color: #F5901A;
+    color: #f15c41;
     cursor: pointer;
 }
 .interactions .favorite-text {
@@ -526,7 +526,7 @@ button:focus {
     display: none;
     margin-left: 5px;
     transform: translateY(2px);
-    color: #F5901A;
+    color: #f15c41;
 }
 .document-card .card-content .content-footer .document-link:hover i {
     display: inline-block;
@@ -638,6 +638,20 @@ button:focus {
 }
 .profile-header .profile-information {
     padding: 10px 20px;
+}
+.profile-filtering {
+    text-align: right;
+}
+.profile-filtering li {
+    margin-bottom: 5px;
+    padding: 5px;
+}
+.profile-filtering li.active {
+    background-color: #f15c41;
+    border-radius: 20px 0 0 20px;
+}
+.profile-filtering li.active a {
+    color: #fff;
 }
 
 

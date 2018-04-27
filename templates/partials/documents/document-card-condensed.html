@@ -1,6 +1,6 @@
 {% load check_if_favorited_filter %}
 
-<div class="card document-card">
+<div class="card document-card condensed">
     <div class="card-image">
         <div class="carousel carousel-slider">
             {% for image in document.images.all %}
@@ -16,7 +16,7 @@
 
                 <div class="secondary-information">
                     <p>{{ document.created_at|date:'M dS Y' }}</p>
-                    <p>30 likes</p>
+                    <p>{{ document.number_of_favorites }} favorite{{ document.number_of_favorites|pluralize }}</p>
                     <p>134 downloads</p>
                 </div>
             </div>
