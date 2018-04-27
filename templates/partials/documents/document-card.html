@@ -28,6 +28,7 @@
             </div>
         </div>
 
+        {% if not user.is_anonymous %}
         <div class="sidebar-lower">
             <div class="favorite">
                 {% with is_favorited=document|check_if_favorited:request.user %}
@@ -43,6 +44,7 @@
                 <i class="far fa-file-archive"></i>
             </div>
         </div>
+        {% endif %}
     </div>
 
     <div class="card-image">

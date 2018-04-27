@@ -6,6 +6,9 @@
         <div class="profile-information">
             <h5>{{ request.user.username }}</h5>
             <h6>joined {{ request.user.date_joined|date:'M dS Y' }}</h6>
+            {% if request.user.profile.personal_website %}
+            <a href="{{ request.user.profile.personal_website }}">{{ request.user.profile.personal_website }}</a>
+            {% endif %}
         </div>
     </div>
 

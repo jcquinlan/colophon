@@ -71,6 +71,8 @@ class DesignDocument(models.Model):
     def is_favorited(self, user):
         """Returns a boolean telling us if the relevant user has favorited this document"""
         from core.models import UserDocumentFavorite
+        if user.is_anonymous:
+            return False
 
         return UserDocumentFavorite.objects.filter(user=user, design_document=self).exists()
 
