@@ -1,4 +1,5 @@
 from django.views import View
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -24,22 +25,39 @@ class EditProfileView(LoginRequiredMixin, View):
 
 
     def post(self, request):
-        try:
-            user_profile = UserProfile.objects.get(user=request.user)
-        except UserProfile.DoesNotExist:
-            user_profile = None
+        is_adding_profile_image = request.GET.get('action') == 'profile_image'
 
-        edit_profile_form = EditProfileForm(request.POST, instance=user_profile)
+        if is_adding_profile_image:
+            return self.save_profile_image(request)
+        else:
+            try:
+                user_profile = UserProfile.objects.get(user=request.user)
+            except UserProfile.DoesNotExist:
+                user_profile = None
 
-        if edit_profile_form.is_valid():
-            edit_profile_form.save(request)
+            edit_profile_form = EditProfileForm(request.POST, instance=user_profile)
 
-            return redirect(reverse('profile'))
+            if edit_profile_form.is_valid():
+                edit_profile_form.save(request)
 
-        context = {
-            'edit_profile_form': edit_profile_form
-        }
+                return redirect(reverse('profile'))
 
-        return render(request, self.template_name, context)
+            context = {
+                'edit_profile_form': edit_profile_form
+            }
 
+            return render(request, self.template_name, context)
 
+    def save_profile_image(self, request):
+        user_profile = UserProfile.objects.get(user=request.user)
+        image_url = request.POST.get('profile_image_url')
+
+        print(request.POST)
+
+        if not image_url:
+            return JsonResponse({'message': 'No image URL found'}, status=400)
+        else:
+            user_profile.profile_image = image_url
+            user_profile.save()
+
+            return JsonResponse({'message': 'It worked'}, status=200)

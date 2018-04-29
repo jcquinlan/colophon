@@ -1,7 +1,11 @@
 <div class="page-header profile-header">
     <div class="profile-summary">
         <div class="profile-image">
-            <i class="fas fa-camera"></i>
+            {% if request.user.profile.profile_image %}
+                <img src="{{ request.user.profile.profile_image }}" alt="">
+            {% else %}
+                <i class="fas fa-camera"></i>
+            {% endif %}
         </div>
         <div class="profile-information">
             <h5>{{ request.user.username }}</h5>

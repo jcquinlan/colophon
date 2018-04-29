@@ -3,11 +3,9 @@ from django import forms
 from core.models import UserProfile
 
 class EditProfileForm(forms.ModelForm):
-    profile_image = forms.CharField(widget=forms.HiddenInput(), required=False, label='')
-
     class Meta:
         model = UserProfile
-        exclude = ['user']
+        exclude = ['user', 'profile_image']
 
     def save(self, request):
         profile = super(EditProfileForm, self).save(commit=False)

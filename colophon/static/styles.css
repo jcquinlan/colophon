@@ -658,6 +658,9 @@ button:focus {
 .profile-filtering li.active a {
     color: #fff;
 }
+.cropper-container {
+    width: 100% !important;
+}
 
 
 /* Document Detail */

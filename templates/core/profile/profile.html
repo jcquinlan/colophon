@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     {% include 'partials/profile/profile-header.html' %}
@@ -22,10 +23,100 @@
             </div>
         </div>
     </div>
+
+    <div id="profile-image-modal" class="modal">
+        <div class="modal-content">
+            <img id="profile-image-preview" alt="Profile Preview">            
+        </div>
+        <div class="modal-footer">
+            <a href="#!" id="upload-profile-picture" class="modal-action">Upload</a>
+        </div>
+    </div>
+
+    <input type="file" name="profile-image-input" style="position: fixed; top: -100vh;">
 {% endblock %}
 
 {% block scripts %}
+<script rel="text/javascript" src="{% static 'javascript/s3/signS3Image.js' %}"></script>
+<script rel="text/javascript" src="{% static 'javascript/utility/helpers.js' %}"></script>
 <script>
+    var modalOptions = {
+        inDuration: 0,
+        outDuration: 0
+    };
+
+    var cropperOptions = {
+        aspectRatio: 1,
+    }
+
+    var profileImageModal = $('#profile-image-modal');
+    var profileImagePreview = $('#profile-image-preview');
+    var uploadProfilePictureButton = $('#upload-profile-picture');
+    var hasCropped = false;
+    profileImageModal.modal(modalOptions);
+
     $('.carousel.carousel-slider').carousel({ fullWidth: true });
+    $('.profile-image').click(updateProfilePicture);
+    var profileImageInput = $('[name="profile-image-input"]');
+    profileImageInput.change(handleNewImage);
+    uploadProfilePictureButton.click(uploadProfilePicture);
+
+    function updateProfilePicture() {
+        profileImageInput.click();
+    }
+
+    function handleNewImage(newFileEvent) {
+        var fr = new FileReader();
+        fr.onload = handleLoadedFile;
+
+        fr.readAsDataURL(newFileEvent.target.files[0]);
+    }
+
+    function handleLoadedFile(event) {
+        if (!hasCropped) {
+            profileImagePreview[0].src = event.target.result;
+            profileImagePreview.cropper(cropperOptions);
+            hasCropped = true;
+        } else {
+            profileImagePreview.cropper('replace', event.target.result);
+        }
+
+        profileImageModal.modal('open');
+    }
+
+    function uploadProfilePicture() {
+        var canvasImage = profileImagePreview.cropper('getCroppedCanvas')
+            .toBlob(function(image) {
+                try {
+                    getSignedRequest(image, randomstring(32), 'image', profileImageSavedInS3);
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+    }
+
+    function profileImageSavedInS3(url) {
+        $.ajax({
+            'url': BASEURL + '/profile/edit/?action=profile_image',
+            'type': 'POST',
+            'data': {
+                'profile_image_url': url
+            },
+            'contentType': "application/x-www-form-urlencoded",
+            'success': profileImageSaved,
+            'error': profileImageError
+        });
+    }
+
+    function profileImageSaved() {
+        profileImageModal.modal('close');
+    }
+
+    function profileImageError(error) {
+        console.error(error);
+        profileImageModal.modal('close');
+    }
+
+
 </script>
 {% endblock %}
