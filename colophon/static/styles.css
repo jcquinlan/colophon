@@ -624,6 +624,7 @@ button:focus {
     display: flex;
 }
 .profile-header .profile-image {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -632,6 +633,20 @@ button:focus {
     background-color: #eee;
     color: #fff;
     cursor: pointer;
+}
+.profile-header .profile-image .profile-image-overlay {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: #000;
+    transition: 0.3s;
+}
+.profile-header .profile-image:hover .profile-image-overlay {
+    opacity: 0.5;
 }
 .profile-header .profile-image i {
     font-size: 1.7em;

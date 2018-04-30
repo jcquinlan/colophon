@@ -2,7 +2,10 @@
     <div class="profile-summary">
         <div class="profile-image">
             {% if request.user.profile.profile_image %}
-                <img src="{{ request.user.profile.profile_image }}" alt="">
+                <div class="profile-image-overlay">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <img id="profile-image" src="{{ request.user.profile.profile_image }}" alt="Profile Image">
             {% else %}
                 <i class="fas fa-camera"></i>
             {% endif %}

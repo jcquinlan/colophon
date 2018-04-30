@@ -103,18 +103,28 @@
                 'profile_image_url': url
             },
             'contentType': "application/x-www-form-urlencoded",
-            'success': profileImageSaved,
+            'success': profileImageSavedWrapper(url),
             'error': profileImageError
         });
     }
 
-    function profileImageSaved() {
-        profileImageModal.modal('close');
+    function profileImageSavedWrapper(url) {
+        return function() {
+            profileImageModal.modal('close');
+            updateProfileImageDiv(url);
+        }
     }
 
     function profileImageError(error) {
         console.error(error);
         profileImageModal.modal('close');
+    }
+
+    function updateProfileImageDiv(url) {
+        var imageDiv = $('.profile-header .profile-image');
+
+        imageDiv.find('#profile-image', 'i').remove();
+        imageDiv.append('<img id="profile-image" src="' + url + '" alt="Profile Image">')
     }
 
 

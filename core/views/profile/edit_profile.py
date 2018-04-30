@@ -52,8 +52,6 @@ class EditProfileView(LoginRequiredMixin, View):
         user_profile = UserProfile.objects.get(user=request.user)
         image_url = request.POST.get('profile_image_url')
 
-        print(request.POST)
-
         if not image_url:
             return JsonResponse({'message': 'No image URL found'}, status=400)
         else:
