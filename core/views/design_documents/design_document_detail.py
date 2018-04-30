@@ -1,11 +1,10 @@
 from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import render, reverse, redirect, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from core.models import DesignDocument, DesignDocumentPackage, UserDocumentFavorite
 
-class DesignDocumentDetailView(LoginRequiredMixin, View):
+class DesignDocumentDetailView(View):
     template_name = 'core/design-documents/design-document-detail.html'
 
     def get(self, request, document_id):

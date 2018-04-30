@@ -63,7 +63,7 @@
                 <div class="secondary-information">
                     <p>{{ document.uploaded_by }}</p>
                     <p>{{ document.created_at|date:'M dS Y' }}</p>
-                    <p>30 likes</p>
+                    <p>{{ document.number_of_favorites }} favorite{{ document.number_of_favorites|pluralize }}</p>
                 </div>
             </div>
         </div>

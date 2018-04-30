@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="document-interactions">
-                    {% if document_package %}
+                    {% if document_package and request.user.is_authenticated %}
                     <a href="{{ document_package.package_url }}" download>
                         <button class="btn tooltipped"
                             data-position="bottom"

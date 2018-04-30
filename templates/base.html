@@ -18,11 +18,37 @@
         {% block meta %}{% endblock %}
     </head>
     <body>
-        {% include 'partials/nav/nav.html' %}
-        {% block banner %}{% endblock %}
-        <div class="container content-wrapper">
-            {% block content %}{% endblock %}
+        <div class="body-content">
+            {% include 'partials/nav/nav.html' %}
+            {% block banner %}
+                <div class="top-banner">
+                    colofont is for finding and sharing book designs. Make an account, or read more about us.
+                </div> 
+            {% endblock %}
+            <div class="container content-wrapper">
+                {% block content %}{% endblock %}
+            </div>
         </div>
+
+        <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5>Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5>Links</h5>
+                <ul>
+                  <li><a href="#!">Link 1</a></li>
+                  <li><a href="#!">Link 2</a></li>
+                  <li><a href="#!">Link 3</a></li>
+                  <li><a href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
     </body>
     <script rel="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.0.0/cropper.min.js"></script>
     <script rel="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
