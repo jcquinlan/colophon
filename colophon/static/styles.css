@@ -75,7 +75,7 @@ nav {
     border-bottom: 1px solid #ddd;
 }
 nav .upload-button {
-    background-color: #f17341;
+    background-color: #f15c41;
 }
 nav .upload-button a {
     color: #fff;
@@ -372,8 +372,14 @@ button:focus {
     background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f5901a' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     color: #fff;
 }
-.landing-banner {
-
+.landing-banner .cta-register {
+    margin-top: 20px;
+}
+.landing-banner .cta-register a {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
 
 /* Tables */
@@ -405,7 +411,7 @@ button:focus {
 }
 
 
-/* Page Header */
+/* Page Header, Page Footer */
  .page-header, .page-footer {
      width: 100%;
 
@@ -416,6 +422,9 @@ button:focus {
      padding-bottom: 30px;
 
      border-bottom: 1px solid #eee;
+ }
+ .page-footer p {
+     color: #fff;
  }
  .page-header > div, .page-footer > div {
      flex-basis: 0;

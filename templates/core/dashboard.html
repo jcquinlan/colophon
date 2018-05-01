@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% if not user.is_authenticated %}
+{% if not request.user.is_authenticated %}
     {% block banner %}
         <div class="fat-banner landing-banner">
             <div class="container">
                 <h2>Find inspiration for book design, and download working files.</h2>
                 <div class="row">
                     <div class="col s6">
-                        We make it easy to find good book designs, and even easier to download the working files.
+                        We make it easier for designers to find inspiration, then download working InDesign files to learn from the pros.
+                        Our tight-knit community is comprised of serious designers, so you know you'll be getting access to solid material, and 
+                        the content you upload for others will be respected.
                     </div>
                     <div class="col s6">
-                        Our community is built on trust, and the fact that all our members are skilled designers speaks to that.
+                        So for the sake of our craft, make an account, and start learning.
+                        <div class="cta-register">
+                            <a href="{% url 'registration_register' %}">Register</a>
+                        </div>
                     </div>
                 </div>
             </div>
