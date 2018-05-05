@@ -18,7 +18,7 @@ class DashboardView(View):
         documents = paginator.get_page(page)
 
         context = {
-            'documents': documents,
+            'documents': documents
         }
 
         return render(request, self.template_name, context)

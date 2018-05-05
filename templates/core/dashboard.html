@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% if not request.user.is_authenticated %}
-    {% block banner %}
+
+{% block banner %}
+    {% if not user.is_authenticated %}
         <div class="fat-banner landing-banner">
             <div class="container">
                 <h2>Find inspiration for book design, and download working files.</h2>
@@ -21,8 +22,10 @@
                 </div>
             </div>
         </div>
-    {% endblock %}
-{% endif %}
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     {% include 'partials/page-header.html' with page_title='Dashboard' paginator=documents %}
