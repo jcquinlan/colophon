@@ -57,6 +57,7 @@ footer.page-footer {
 .btn, .btn-large {
     background-color: #f15c41;
     border-radius: 0;
+    text-transform: none;
 }
 .btn:hover, .btn-large:hover {
     background-color: #f15c41;
@@ -712,6 +713,9 @@ button:focus {
 }
 .cropper-container {
     width: 100% !important;
+}
+.account-links {
+    margin-bottom: 30px;
 }
 
 

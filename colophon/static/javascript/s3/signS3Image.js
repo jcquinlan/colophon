@@ -12,6 +12,23 @@ var fileTypeParams = {
     }
 };
 
+var fileTypePrepFunctions = {
+    image: prepImage,
+    asset: prepAsset
+};
+
+function prepImage(image) {
+    var compressor = new ImageCompressor();
+
+    return compressor.compress(image, { maxWidth: 600 })
+}
+
+function prepAsset(asset) {
+    return new Promise(function(resolve, reject) {
+        resolve(asset);
+    });
+}
+
 function imageFileValidation(files) {
     if (files.length > 3) {
         throw 'You may only upload three images';
@@ -38,11 +55,14 @@ function handleFileUpload(fileType, fileInput, successCallback, errorCallback) {
         }
 
         for (var i = 0; i < files.length; i++) {
-            try {
-                getSignedRequest(files[i], files[i].name, fileType, successCallback);
-            } catch (error) {
-                errorCallback(error)
-            }
+            var prepFunction = fileTypePrepFunctions[fileType];
+            prepFunction(files[i])
+                .then(function(result) {
+                    getSignedRequest(result, result.name, fileType, successCallback);
+                })
+                .catch(function(error) {
+                    errorCallback(error);
+                })
         }
     };
 }

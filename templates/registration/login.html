@@ -6,6 +6,14 @@
         <form action="" method="POST">
             {% csrf_token %}
 
+            {% if form.non_field_errors %}
+            <div class="form-error-list">
+                {% for err in form.non_field_errors %}
+                <p class="form-error">{{ err }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             {% for field in form %}
                 <div class="field">
                     {{ field.errors }}

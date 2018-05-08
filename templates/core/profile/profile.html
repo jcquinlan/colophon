@@ -87,11 +87,15 @@
     function uploadProfilePicture() {
         var canvasImage = profileImagePreview.cropper('getCroppedCanvas')
             .toBlob(function(image) {
-                try {
-                    getSignedRequest(image, randomstring(32), 'image', profileImageSavedInS3);
-                } catch (error) {
-                    console.error(error);
-                }
+                var compressor = new ImageCompressor();
+
+                compressor.compress(image, { maxWidth: 600 })
+                    .then(function(compressedImage) {
+                        getSignedRequest(compressedImage, randomstring(32), 'image', profileImageSavedInS3);
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
             });
     }
 
