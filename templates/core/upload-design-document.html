@@ -39,11 +39,19 @@
         }
 
         function handleAssetUrl(url) {
+            var assetWrapper = $('#user-uploaded-asset');
+
+            removeUploadAssetHelpText();
+            assetWrapper.append($('<p class="preexisting-asset"><i class="far fa-file-archive"></i> Asset uploaded.</p>'));
             hiddenAssetFileInput[0].value = JSON.stringify(url);
         }
 
         function removeUploadPhotosHelpText() {
             $('.user-uploaded-images .help-text').remove();
+        }
+
+        function removeUploadAssetHelpText() {
+            $('.user-uploaded-asset .help-text').remove();
         }
 
         function errorCallback(fileInput) {
