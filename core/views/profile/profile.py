@@ -1,4 +1,5 @@
 from django.views import View
+from django.http import JsonResponse
 from django.shortcuts import render, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -22,6 +23,11 @@ class ProfileView(LoginRequiredMixin, View):
         }
 
         return render(request, self.template_name, context)
+
+    def delete(self, request):
+        request.user.delete()
+
+        return JsonResponse({'message': 'Account successfully deleted'}, status=200)
 
     def get_filtered_documents(self, filter_param, user):
         try:

@@ -25,6 +25,7 @@ from core.views.profile.profile import ProfileView
 from core.views.profile.edit_profile import EditProfileView
 from core.views.profile.change_password import ChangePasswordView
 from core.views.profile.profile_posts import ProfilePostsView
+from core.views.profile.confirm_delete_account import ConfirmDeleteAccountView
 from core.views.s3.sign_s3 import SignS3View
 
 urlpatterns = [
@@ -36,6 +37,11 @@ urlpatterns = [
     path('profile/edit/', EditProfileView.as_view(), name='edit-profile'),
     path('profile/posts/', ProfilePostsView.as_view(), name='profile_posts'),
     path('profile/change-password/', ChangePasswordView.as_view(), name='change_password'),
+    path(
+        'profile/delete/',
+        ConfirmDeleteAccountView.as_view(),
+        name='confirm_delete_account'
+    ),
     path(
         'document/<int:document_id>/',
         DesignDocumentDetailView.as_view(),

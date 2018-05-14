@@ -278,7 +278,6 @@ button:focus {
     color: #aaa;
 }
 .danger {
-    text-transform: uppercase;
     transition: 0.2s;
 
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),
@@ -716,6 +715,9 @@ button:focus {
 }
 .account-links {
     margin-bottom: 30px;
+}
+.confirm-delete {
+    text-align: center;
 }
 
 

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'partials/page-header.html' with page_title='Delete Account?' %}
+
+    <div class="row">
+        <div class="col s8 offset-s2">
+            <div class="confirm-delete">
+                <p>Are you sure? We gon' miss you!</p>
+                <button class="btn danger" id="confirm-delete">Delete Account</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script rel="text/javascript">
+    var deleteButton = $('#confirm-delete');
+    deleteButton.click(deleteAccount);
+
+    function deleteAccount() {
+        $.ajax({
+            'url': BASEURL + '/profile/',
+            'type': 'DELETE',
+            'success': accountDeletedSuccess,
+            'error': accountDeletedError
+        });
+    }
+
+    function accountDeletedSuccess() {
+        window.location.href = BASEURL;
+    }
+
+    function accountDeletedError() {
+        console.error(error);
+        createToast('Error occurred when deleting account.');
+    }
+</script>
+{% endblock %}
