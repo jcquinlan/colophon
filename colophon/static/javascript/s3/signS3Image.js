@@ -3,6 +3,13 @@ var fileTypeValidators = {
     asset: assetValidation
 };
 
+var acceptableFileTypes = {
+    image: ['image/png', 'image/jpeg',],
+    asset: []
+};
+
+var fileExtensionPattern = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
+
 var fileTypeParams = {
     image: {
         file_type: 'image/jpeg'
@@ -13,11 +20,11 @@ var fileTypeParams = {
 };
 
 var fileTypePrepFunctions = {
-    image: prepImage,
+    image: compressImage,
     asset: prepAsset
 };
 
-function prepImage(image) {
+function compressImage(image) {
     var compressor = new ImageCompressor();
 
     return compressor.compress(image, { maxWidth: 600 })
@@ -29,14 +36,37 @@ function prepAsset(asset) {
     });
 }
 
+function checkType(file) {
+    return new Promise(function(resolve, reject) {
+        resolve(file);
+    });
+}
+
 function imageFileValidation(files) {
     if (files.length > 3) {
         throw 'You may only upload three images';
     }
+    
+    for(var i = 0; i < files.length; i++) {
+        if (!acceptableFileTypes['image'].includes(files[i].type)) {
+            throw 'You must upload a JPEG or PNG';
+        }
+    }
 }
 
-function assetValidation() {
-    return;
+function assetValidation(files) {
+    if (files.length > 1) {
+        throw 'You may only upload three images';
+    }
+
+    // Make sure the name of the uploaded file is an InDesign file
+    if (!isInDesignFile(files[0])) {
+        throw 'You must upload an InDesign file';
+    }
+}
+
+function isInDesignFile(file) {
+    return file.name.match(fileExtensionPattern)[0] === '.indd';
 }
 
 function handleFileUpload(fileType, fileInput, successCallback, errorCallback) {
